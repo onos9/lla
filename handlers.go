@@ -31,6 +31,7 @@ func ImageShow(w http.ResponseWriter, r *http.Request) {
 	if imageId, err = strconv.Atoi(vars["imageId"]); err != nil {
 		panic(err)
 	}
+	
 	image := RepoFindImage(imageId)
 	// bulundu mu kontrol
 	if image.Id > 0 {
@@ -59,24 +60,31 @@ curl \
 */
 func ImageCreate(w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(32 << 20)
+	
 	file, handler, err := r.FormFile("uploadfile")
 	if err != nil {
 		panic(err)
 	}
+
 	defer file.Close()
+	
 	f, err := os.OpenFile("./uploads/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
-	panic(err)
 	if err != nil {
+		panic(err)
 	}
+	
 	defer f.Close()
+	
 	io.Copy(f, file)
 	dir, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
+	
 	t := RepoCreateImage(Image{Location: strings.Join(r.Form["location"], ""),
 		Path: dir + "/uploads/" + handler.Filename,
 		Date: time.Now()})
+
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusCreated)
 	if err := json.NewEncoder(w).Encode(t); err != nil {

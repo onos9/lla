@@ -35,5 +35,5 @@ func RepoDestroyImage(id int) error {
 			return nil
 		}
 	}
-	return fmt.Errorf("Could not find Image with id of %d to delete", id)
+	return fmt.Errorf("could not find image with id of %d to delete", id)
 }
