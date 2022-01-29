@@ -11,7 +11,7 @@ type Image struct {
 
 type Images []Image
 
-func(img *Image)InitImageDir(){
+func(img *Image)InitDir(){
     err := filepath.Walk(".",
     func(path string, info os.FileInfo, err error) error {
     if err != nil {
@@ -26,7 +26,7 @@ if err != nil {
 }
 }
 	
-func IsEmpty(name string) (bool, error) {
+func(img *Image) IsEmpty(name string) (bool, error) {
     f, err := os.Open(name)
     if err != nil {
         return false, err
