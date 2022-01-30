@@ -35,13 +35,6 @@ func main() {
 	parseCmdLineArgs()
 	logs.Debugf("The root path is %s", rootPath)
 
-	// if configFilePath != "" {
-	// 	settings.ConfigFilePath = configFilePath
-	// }
-	// logs.Debugf("The configuration file path is %s", settings.ConfigFilePath)
-
-	// settings.LoadAppSetting()
-
 	if port == 0 {
 		port = DefaultPort
 	}
@@ -53,8 +46,6 @@ func main() {
 	}
 
 	fmt.Printf("Service listen on port \x1b[31;1m%d\x1b[0m and server ip addresses are \x1b[31;1m%s\x1b[0m\n", port, strings.Join(localIps, ", "))
-
-	//http.Handle("/", http.StripPrefix("/", http.FileServer(helper.FSDir(rootPath))))
 
 	httpAddr := fmt.Sprintf(":%d", port)
 	if err := http.ListenAndServe(httpAddr, router); err != nil {
