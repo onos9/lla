@@ -11,6 +11,8 @@ web/coverage
 
 # production
 web/build
+uploads/*
+!uploads/.uploads
 
 # misc
 web/.DS_Store
