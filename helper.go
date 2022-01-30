@@ -1,4 +1,4 @@
-package helper
+package main
 
 import (
 	"errors"
@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/swanwish/go-common/logs"
+	"github.com/lla/logs"
 )
 
 type FSDir string

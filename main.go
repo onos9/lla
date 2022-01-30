@@ -1,8 +1,13 @@
 package main
 
 import (
-	"log"
+	"flag"
+	"fmt"
 	"net/http"
+	"runtime"
+	"strings"
+
+	"github.com/lla/logs"
 )
 
 const (
@@ -25,7 +30,7 @@ func parseCmdLineArgs() {
 func main() {
 
 	router := NewRouter()
-	
+
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	parseCmdLineArgs()
 	logs.Debugf("The root path is %s", rootPath)
@@ -41,7 +46,7 @@ func main() {
 		port = DefaultPort
 	}
 
-	localIps, err := utils.GetLocalIPAddrs()
+	localIps, err := GetLocalIPAddrs()
 	if err != nil {
 		fmt.Println("Failed to get local ip addresses.")
 		return
@@ -49,10 +54,10 @@ func main() {
 
 	fmt.Printf("Service listen on port \x1b[31;1m%d\x1b[0m and server ip addresses are \x1b[31;1m%s\x1b[0m\n", port, strings.Join(localIps, ", "))
 
-	http.Handle("/", http.StripPrefix("/", http.FileServer(helper.FSDir(rootPath))))
+	//http.Handle("/", http.StripPrefix("/", http.FileServer(helper.FSDir(rootPath))))
 
 	httpAddr := fmt.Sprintf(":%d", port)
-	if err := http.ListenAndServe(httpAddr,router) ); err != nil {
+	if err := http.ListenAndServe(httpAddr, router); err != nil {
 		fmt.Printf("http.ListendAndServer() failed with %s\n", err)
 	}
 

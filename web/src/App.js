@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom"
 import './App.css';
 import Footer from "./components/footer";
 import Header from "./components/header";
+import Cms from "./pages/cms";
 import Dashboard from "./pages/dashboard";
 import Home from "./pages/home";
 
@@ -14,7 +15,7 @@ function App() {
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin" element={<Cms />} />
       </Routes>
       <Footer />
     </BrowserRouter>
