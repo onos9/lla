@@ -35,12 +35,12 @@ func main() {
 	parseCmdLineArgs()
 	logs.Debugf("The root path is %s", rootPath)
 
-	if configFilePath != "" {
-		settings.ConfigFilePath = configFilePath
-	}
-	logs.Debugf("The configuration file path is %s", settings.ConfigFilePath)
+	// if configFilePath != "" {
+	// 	settings.ConfigFilePath = configFilePath
+	// }
+	// logs.Debugf("The configuration file path is %s", settings.ConfigFilePath)
 
-	settings.LoadAppSetting()
+	// settings.LoadAppSetting()
 
 	if port == 0 {
 		port = DefaultPort
