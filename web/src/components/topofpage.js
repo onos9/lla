@@ -1,3 +1,7 @@
+import React from "react"
+
+const TopOfPage = () => {
+return (
 <section id="topOfPage" class="topTabsWrap color_section">
         <div class="container">
             <div class="row">
@@ -14,3 +18,7 @@
             </div>
         </div>
     </section>
+    )
+}
+
+export default TopOfPage

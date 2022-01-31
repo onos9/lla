@@ -1,6 +1,7 @@
 import React from "react"
 
-const Page404 = () => {
+const NotFound = () => {
+
     return (
         <main>
             <section className="mainWrap with_sidebar sideBarLeft">
@@ -27,8 +28,7 @@ const Page404 = () => {
                 </div>
             </section>
         </main>
-
     )
 }
 
-export default Page404
+export default NotFound
