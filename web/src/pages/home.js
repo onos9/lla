@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 const Home = () => {
-        return <main>
+    const [appState, setAppState] = useState({
+        loading: false,
+        repos: null,
+    });
+
+    useEffect(() => {
+        setAppState({ loading: true });
+        const user = `http://localhost:8080/images`;
+        fetch(user)
+          .then((res) => res.json())
+          .then((repos) => {
+            setAppState({ loading: false, repos: repos });
+            console.log(repos)
+          });
+      }, [setAppState]);
+    
+        return (<main>
                 <section className="text-center color_section">
         <div className="container">
             <div className="row">
@@ -2156,7 +2172,8 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
-        </main>
+            </main>
+        )
 }
 
 export default Home

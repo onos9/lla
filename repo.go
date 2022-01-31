@@ -6,10 +6,10 @@ var currentId int
 
 var images Images
 
-func init() {
-	RepoCreateImage(Image{Id: 1, Location: "Pikacu Ustanin Tas Firini", Path: "C://Windovz31"})
-	RepoCreateImage(Image{Id: 2, Location: "Ultron Ikinci El Elektronik", Path: "/Userz/Mac/L1brari3s/DarwinWasHere"})
-}
+// func init() {
+// 	RepoCreateImage(Image{Id: 1, Location: "Pikacu Ustanin Tas Firini", Path: "C://Windovz31"})
+// 	RepoCreateImage(Image{Id: 2, Location: "Ultron Ikinci El Elektronik", Path: "/Userz/Mac/L1brari3s/DarwinWasHere"})
+// }
 
 func RepoFindImage(id int) Image {
 	for _, t := range images {

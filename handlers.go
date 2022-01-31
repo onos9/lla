@@ -7,8 +7,6 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
-	"strings"
-	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -82,18 +80,12 @@ func ImageCreate(w http.ResponseWriter, r *http.Request) {
 	defer f.Close()
 
 	io.Copy(f, file)
-	dir, err := os.Getwd()
-	if err != nil {
-		panic(err)
-	}
 
-	t := RepoCreateImage(Image{Location: strings.Join(r.Form["location"], ""),
-		Path: dir + "/uploads/" + handler.Filename,
-		Date: time.Now()})
+	//t := RepoCreateImage(Image{Date: time.Now()})
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusCreated)
-	if err := json.NewEncoder(w).Encode(t); err != nil {
+	if err := json.NewEncoder(w).Encode(Image{}); err != nil {
 		panic(err)
 	}
 }
@@ -103,6 +95,9 @@ func ImageCreate(w http.ResponseWriter, r *http.Request) {
 // file located at the index path on the SPA handler will be served. This
 // is suitable behavior for serving an SPA (single page application).
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+
+	w.WriteHeader(http.StatusOK)
+
 	// get the absolute path to prevent directory traversal
 	path, err := filepath.Abs(r.URL.Path)
 	if err != nil {

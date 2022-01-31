@@ -6,14 +6,12 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"time"
 )
 
 type Image struct {
-	Id       int       `json:"id"`
-	Location string    `json:"location"`
-	Path     string    `json:"path"`
-	Date     time.Time `json:"date"`
+	Id        int `json:"id"`
+	URL       string `json:"url"`
+	Component string `json:"component"`
 }
 
 type Images []Image

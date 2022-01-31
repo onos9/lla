@@ -25,6 +25,7 @@ func NewRouter() *mux.Router {
 
 	spa := spaHandler{staticPath: "static", indexPath: "index.html"}
 	router.PathPrefix("/").Handler(spa)
+	router.Use(CORSMiddleware)
 
 	return router
 }
