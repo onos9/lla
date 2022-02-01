@@ -18,28 +18,6 @@ import ProductCategory from './pages/product_category';
 import UnderConstruction from './pages/under_construction';
 
 function App() {
-  const [appState, setAppState] = useState({
-    loading: false,
-    repos: null,
-  });
-
-  useEffect(async () => {
-    setAppState({ loading: true });
-
-    const endpoint = `http://localhost:8080/images`;
-    let repos = await (await fetch(endpoint)).json()
-
-    setAppState({ loading: false, repos: repos });
-
-    console.log(repos)
-
-    if (repos === null) {
-      let images = document.getElementsByTagName("img")
-      let src = Array.from(images).map(img => img.src)
-      console.log({ home: src })
-    }
-
-  }, [])
 
   return (
     <>
