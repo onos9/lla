@@ -13,21 +13,21 @@ type Routes []Route
 
 var routes = Routes{
 	Route{
-		"ImageIndex",
+		"GetAll",
 		"GET",
-		"/images",
-		ImageIndex,
+		"api/multimedia",
+		GetAll,
 	},
 	Route{
-		"ImageCreate",
+		"Create",
 		"POST",
-		"/images",
-		ImageCreate,
+		"api/multimedia",
+		Create,
 	},
 	Route{
-		"ImageShow",
-		"GET",
-		"/images/{imageId}",
-		ImageShow,
+		"FileUpload",
+		"POST",
+		"api/uploads/{fileName}",
+		FileUpload,
 	},
 }

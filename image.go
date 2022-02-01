@@ -1,7 +1,7 @@
 package main
 
-type ImageCategory struct {
+type Category struct {
 	Component   []string `json:"component"`
 }
 
-type ImageCategories []ImageCategory
+type Categories []Category
