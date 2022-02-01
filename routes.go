@@ -13,21 +13,21 @@ type Routes []Route
 
 var routes = Routes{
 	Route{
-		"GetAll",
+		"getAll",
 		"GET",
 		"api/multimedia",
-		GetAll,
+		getAll,
 	},
 	Route{
-		"Create",
+		"create",
 		"POST",
 		"api/multimedia",
-		Create,
+		create,
 	},
 	Route{
-		"FileUpload",
+		"handleUpload",
 		"POST",
 		"api/uploads/{fileName}",
-		FileUpload,
+		handleUpload,
 	},
 }

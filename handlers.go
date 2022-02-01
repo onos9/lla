@@ -24,7 +24,7 @@ var images Categories
 
 const MAX_UPLOAD_SIZE = 1024 * 1024 // 1MB
 
-func GetAll(w http.ResponseWriter, r *http.Request) {
+func getAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	if err := json.NewEncoder(w).Encode(images); err != nil {
@@ -32,7 +32,7 @@ func GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Create(w http.ResponseWriter, r *http.Request) {
+func create(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 
 	var c Category
@@ -47,7 +47,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 // This function returns the filename(to save in database) of the saved file
 // or an error if it occurs
-func FileUpload(w http.ResponseWriter, r *http.Request) {
+func handleUpload(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 
 	if r.Method != "POST" {
@@ -56,7 +56,7 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// MultipartReader parses a request body as multipart/form-data with a MAX_UPLOAD_SIZE
-	r.Body = http.MaxBytesReader(w, r.Body, MAX_UPLOAD_SIZE)
+	//r.Body = http.MaxBytesReader(w, r.Body, MAX_UPLOAD_SIZE)
 	mr, err := r.MultipartReader()
 	if err != nil {
 		http.Error(w, "The uploaded file is too big. Please choose an file that's less than 1MB in size", http.StatusBadRequest)
@@ -80,7 +80,7 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 		}
 
 		var read int64
-		var p float32
+		var progress float32
 
 		for {
 			buffer := make([]byte, 100000)
@@ -91,78 +91,14 @@ func FileUpload(w http.ResponseWriter, r *http.Request) {
 			}
 
 			read = read + int64(cBytes)
-			//fmt.Printf("read: %v \n",read )
-			p = float32(read) / float32(length) * 100
-			fmt.Printf("progress: %v \n", p)
+			progress = float32(read) / float32(length) * 100
+			fmt.Printf("progress: %v \n", progress)
 			dst.Write(buffer[0:cBytes])
 		}
 	}
 
 	fmt.Fprintf(w, "Upload successful")
 }
-
-// func ImageShow(w http.ResponseWriter, r *http.Request) {
-// 	vars := mux.Vars(r)
-
-// 	var imageId int
-// 	var err error
-// 	if imageId, err = strconv.Atoi(vars["imageId"]); err != nil {
-// 		panic(err)
-// 	}
-
-// 	image := RepoFindImage(imageId)
-// 	// bulundu mu kontrol
-// 	if image.Id > 0 {
-// 		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-// 		w.WriteHeader(http.StatusOK)
-// 		if err := json.NewEncoder(w).Encode(image); err != nil {
-// 			panic(err)
-// 		}
-// 		return
-// 	}
-
-// 	// 404
-// 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-// 	w.WriteHeader(http.StatusNotFound)
-// 	if err := json.NewEncoder(w).Encode(jsonErr{Code: http.StatusNotFound, Text: "Not Found"}); err != nil {
-// 		panic(err)
-// 	}
-
-// }
-
-/*test:
-curl \
-  -F "uploadfile=@DOSYA" \
-  -F "location=santa' secret shop" \
-  localhost:8080/images
-*/
-// func ImageCreate(w http.ResponseWriter, r *http.Request) {
-// 	r.ParseMultipartForm(32 << 20)
-
-// 	file, handler, err := r.FormFile("uploadfile")
-// 	if err != nil {
-// 		panic(err)
-// 	}
-
-// 	defer file.Close()
-
-// 	f, err := os.OpenFile("./uploads/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
-// 	if err != nil {
-// 		panic(err)
-// 	}
-
-// 	defer f.Close()
-
-// 	io.Copy(f, file)
-
-// 	//t := RepoCreateImage(Image{Date: time.Now()})
-
-// 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-// 	w.WriteHeader(http.StatusCreated)
-// 	if err := json.NewEncoder(w).Encode(Image{}); err != nil {
-// 		panic(err)
-// 	}
-// }
 
 // ServeHTTP inspects the URL path to locate a file within the static dir
 // on the SPA handler. If a file is found, it will be served. If not, the
