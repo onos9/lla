@@ -1,24 +1,10 @@
 import React from "react"
+import TopOfPage from "../components/topofpage"
 
 const About = () => {
     return (
         <main>
-            <section id="topOfPage" className="topTabsWrap color_section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="speedBar">
-                                <a className="home" href="index.html">Home</a>
-                                <span className="breadcrumbs_delimiter"> / </span>
-                                <a className="all" href="#">All Posts</a>
-                                <span className="breadcrumbs_delimiter"> / </span>
-                                <span className="current">About Us</span>
-                            </div>
-                            <h3 className="pageTitle h3">About Us</h3>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <TopOfPage />
             <section className="mainWrap">
                 <div className="container">
                     <div className="row">

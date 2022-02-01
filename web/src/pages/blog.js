@@ -1,9 +1,11 @@
 import React from "react"
+import TopOfPage from "../components/topofpage"
 
 const Blog = () => {
 
     return (
         <main>
+            <TopOfPage />
             <section className="mainWrap without_sidebar">
                 <div className="container" role="main">
                     <div className="row content">

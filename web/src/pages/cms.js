@@ -1,8 +1,10 @@
 import React from "react"
+import TopOfPage from "../components/topofpage"
 
 const CMS = () => {
   return (
     <main>
+      <TopOfPage />
       <section className="portfolio_classic_two_columns">
         <div className="container">
           <div className="row">
@@ -328,7 +330,6 @@ const CMS = () => {
           </div>
         </div>
       </section>
-
     </main>
   )
 }

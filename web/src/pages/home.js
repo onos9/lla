@@ -5,14 +5,13 @@ import UserHeader from '../components/user_header';
 const Home = () => {
 
     const homeWrapper = useRef(null)
-    const _isMounted = useRef(true);
+    const _isMounted = useRef(false);
     const [appState, setAppState] = useState({
         loading: false,
         repos: null,
     });
 
     useEffect(async () => {
-        let cancel = false
 
         if (_isMounted.current) return
         setAppState({ loading: true });
@@ -34,7 +33,6 @@ const Home = () => {
     }, [])
 
     return (
-
         <main ref={homeWrapper}>
             <Slider />
             <UserHeader />
@@ -2330,7 +2328,6 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
         </main>
     )
 }

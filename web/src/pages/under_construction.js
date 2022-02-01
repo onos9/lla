@@ -1,8 +1,10 @@
 import React from "react"
+import TopOfPage from "../components/topofpage"
 
 const UnderConstruction = () => {
   return (
-    <div>
+    <main>
+      <TopOfPage />
       <section id="topOfPage" className="topTabsWrap color_section">
         <div className="container">
           <div className="row">
@@ -40,7 +42,7 @@ const UnderConstruction = () => {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }
 
