@@ -11,7 +11,7 @@ import Image from './image';
 import Pagination from './pagination'; 
 import Shop from './shop'; 
 import Slider from './slider'; 
-import ToOfPage from './topofpage'; 
+import TopOfPage from './topofpage'; 
 import UserHeader from './userHeader'; 
 // import * as Table from './Table.js';
 
@@ -25,6 +25,6 @@ export {
     Pagination,  
     Shop,  
     Slider,  
-    ToOfPage,  
+    TopOfPage,  
     UserHeader,  
 };

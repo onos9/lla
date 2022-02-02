@@ -1,5 +1,5 @@
 import React from "react"
-import TopOfPage from "../components/topofpage"
+import { TopOfPage } from "../components/site"
 
 const Pricing = () => {
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Slider from '../components/slider';
-import UserHeader from '../components/user_header';
+import { Slider, UserHeader } from "../components/site"
 
 const Home = () => {
 

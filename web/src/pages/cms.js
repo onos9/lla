@@ -1,19 +1,18 @@
 import React from "react"
-import TopOfPage from "../components/topofpage"
-
-import Upload from "../components/uplaod"
-
-import ImagesList from './components/imagesList/ImagesList';
-import Nav from './components/Nav';
-import Upload from './components/upload/Upload';
 import { Container } from '@mui/material';
-import AuthContext from './context/AuthContext';
-import Modal from './components/Modal';
-import MainNotification from './components/MainNotification';
-import Loading from './components/Loading';
-import Verification from './components/user/Verification';
 
+import { TopOfPage } from "../components/site"
+import { AuthContext } from "../context"
+import { Verification } from "../components/user"
 
+import {
+  ImageList,
+  Nav,
+  Upload,
+  Loading,
+  MainNotification,
+  Modal,
+} from "../components/cms"
 
 const imagePool = [
   "img/portfolio/masonry6-287x287.jpg",
@@ -62,7 +61,7 @@ const CMS = () => {
           <MainNotification />
           <Nav />
           <Upload />
-          <ImagesList />
+          <ImageList />
         </AuthContext>
       </Container>
 

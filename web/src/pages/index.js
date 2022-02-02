@@ -6,7 +6,8 @@
 import NotFound from './404'; 
 import About from './about';
 import Blog from './blog'; 
-import CMS from './cms'; 
+import CMS from './cms';
+import Contact from './contact'; 
 import FAQ from './faq'; 
 import Home from './home'; 
 import Potfolio from './potfolio'; 
@@ -21,7 +22,8 @@ export {
     NotFound, 
     About,
     Blog, 
-    CMS,  
+    CMS,
+    Contact,  
     FAQ,  
     Home,  
     Potfolio,  
