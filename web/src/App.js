@@ -29,7 +29,7 @@ function App() {
           <Route path="/404" element={<NotFound />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/cms" element={<CMS />} />
+          <Route path="/admin" element={<CMS />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
           <Route exact path="/" element={<Home />} />

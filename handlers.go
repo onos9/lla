@@ -76,6 +76,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 
 		part, err := mr.NextPart()
 		if err == io.EOF {
+			fmt.Printf("\nDone!")
 			break
 		}
 
@@ -87,6 +88,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 
 			cBytes, err := part.Read(buffer)
 			if err == io.EOF {
+				fmt.Printf("\nLast buffer read!")
 				break
 			}
 
