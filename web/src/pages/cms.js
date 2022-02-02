@@ -1,7 +1,17 @@
 import React from "react"
-import Image from "../components/image"
-import Pagination from "../components/pagination"
 import TopOfPage from "../components/topofpage"
+import Container from "@mui/material"
+import Upload from "../components/uplaod"
+
+import ImagesList from './components/imagesList/ImagesList';
+import Nav from './components/Nav';
+import Upload from './components/upload/Upload';
+import { Container } from '@mui/material';
+import AuthContext from './context/AuthContext';
+import Modal from './components/Modal';
+import MainNotification from './components/MainNotification';
+import Loading from './components/Loading';
+import Verification from './components/user/Verification';
 
 const imagePool = [
   "img/portfolio/masonry6-287x287.jpg",
@@ -34,24 +44,26 @@ const imagePool = [
 ]
 
 const CMS = () => {
+
+  const onClickHandler = (e) => {
+
+  }
+
   return (
     <main>
       <TopOfPage />
-      <section className="portfolio_grid_columns">
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12">
-              <div id="style_portfolio_grid" className="portfolioWrap">
-                <div className="isotopeFiltr"><ul><li className="squareButton active"><a href="#" data-filter="*">All</a></li><li className="squareButton"><a href="#" data-filter=".flt_65">clear</a></li><li className="squareButton"><a href="#" data-filter=".flt_36">Design</a></li><li className="squareButton"><a href="#" data-filter=".flt_66">exclusive</a></li><li className="squareButton"><a href="#" data-filter=".flt_7">portfolio</a></li><li className="squareButton"><a href="#" data-filter=".flt_63">portfolio hover</a></li><li className="squareButton"><a href="#" data-filter=".flt_64">print</a></li></ul></div>
-                <section className="portfolio isotope folio4col inited" data-columns={4} style={{ position: 'relative', height: 980 }}>
-                {imagePool.map((url,idx) => <Image key={idx} url={url} />)} 
-                </section>
-              </div>
-              <Pagination />
-            </div>
-          </div>
-        </div>
-      </section>
+      <Container maxWidth="lg" sx={{ textAlign: 'center', mt: '3rem' }}>
+        <AuthContext>
+          <Loading />
+          <Modal />
+          <Verification />
+          <MainNotification />
+          <Nav />
+          <Upload />
+          <ImagesList />
+        </AuthContext>
+      </Container>
+
     </main>
   )
 }

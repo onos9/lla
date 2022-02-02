@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import './App.css';
 
-import Footer from "./components/footer";
-import Header from "./components/header";
+import Footer from "./components/site";
+import Header from "./components/site";
 
 import NotFound from './pages/404';
 import About from './pages/about';
@@ -16,8 +16,8 @@ import Home from "./pages/home";
 import Potfolio from './pages/potfolio';
 import Pricing from './pages/pricing';
 import Product from './pages/product';
-import ProductCategory from './pages/product_category';
-import UnderConstruction from './pages/under_construction';
+import ProductCategory from './pages/productCategory';
+import UnderConstruction from './pages/underConstruction';
 
 function App() {
 

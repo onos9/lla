@@ -1,6 +1,6 @@
 import React from "react"
 
-const Images = () => {
+const Gallary = () => {
     return (
         <ul className="menu-panel thumb">
             <li>
@@ -81,4 +81,4 @@ const Images = () => {
     )
 }
 
-export default Images
+export default Gallary
