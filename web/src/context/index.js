@@ -5,7 +5,6 @@
 // This will import automatically every function exported by these files
 import AuthContext from './autoContext'; 
 
-
 // Export again
 export {
     AuthContext,
