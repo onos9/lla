@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../cms/navbar";
+import NavBar from "./navbar";
 
 const Header = () => {
     return (
