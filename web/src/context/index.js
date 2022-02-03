@@ -8,4 +8,4 @@ import AuthContext from './autoContext';
 // Export again
 export {
     AuthContext,
-};
+}; 

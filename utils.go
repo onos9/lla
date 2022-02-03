@@ -21,7 +21,6 @@ func GetLocalIPAddrs() ([]string, error) {
 			}
 		}
 	}
-
 	return ips, nil
 }
 
