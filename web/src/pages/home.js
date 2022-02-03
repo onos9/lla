@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Slider, UserHeader } from "../components/site"
+import { Footer, Header, Slider, UserHeader } from "../components/site"
 
 const Home = () => {
 
@@ -33,6 +33,7 @@ const Home = () => {
 
     return (
         <main ref={homeWrapper}>
+            <Header />
             <Slider />
             <UserHeader />
             <section className="mainWrap with_sidebar sideBarRight">
@@ -2327,6 +2328,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </main>
     )
 }

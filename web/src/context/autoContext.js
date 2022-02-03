@@ -33,21 +33,21 @@
     const [loading, setLoading] = useState(false);
   
     const signUp = (email, password) => {
-      //return createUserWithEmailAndPassword(auth, email, password);
+      return //createUserWithEmailAndPassword(auth, email, password);
     };
     const login = (email, password) => {
-      //return signInWithEmailAndPassword(auth, email, password);
+      return //signInWithEmailAndPassword(auth, email, password);
     };
     const loginWithGoogle = () => {
       // const provider = new GoogleAuthProvider();
-      // return signInWithPopup(auth, provider);
+      return //signInWithPopup(auth, provider);
     };
     const logout = () => {
-      //return signOut(auth);
+      return //signOut(auth);
     };
   
     const resetPassword = (email) => {
-      //return sendPasswordResetEmail(auth, email);
+      return //sendPasswordResetEmail(auth, email);
     };
   
     useEffect(() => {
@@ -55,7 +55,7 @@
       //   setCurrentUser(user);
       //   console.log('user status changed: ', user);
       // });
-      // return unsubscribe;
+      return //unsubscribe;
     }, []);
   
     const value = {

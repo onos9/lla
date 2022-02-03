@@ -13,6 +13,8 @@ import {
   MainNotification,
   Modal,
 } from "../components/cms"
+import Top from "../components/cms/top";
+import PageHeader from "../components/site/pageHeader";
 
 const imagePool = [
   "img/portfolio/masonry6-287x287.jpg",
@@ -52,9 +54,11 @@ const CMS = () => {
 
   return (
     <main>
-      <TopOfPage />
+      {/* <PageHeader /> */}
+      {/* <Top /> */}
       <Container maxWidth="lg" sx={{ textAlign: 'center', mt: '3rem' }}>
         <AuthContext>
+
           <Loading />
           <Modal />
           <Verification />

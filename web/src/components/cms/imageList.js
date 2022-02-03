@@ -5,21 +5,35 @@ import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import { Avatar, Tooltip, Typography } from '@mui/material';
 import moment from 'moment';
 import Options from './options';
-import useFirestore from '../../firebase/useFirestore';
+//import useFirestore from '../../firebase/useFirestore';
 import { useAuth } from '../../context/autoContext';
+import { v4 as uuidv4 } from 'uuid';
 
 function srcset(image, size, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${
-      size * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
+    srcSet: `${image}?w=${size * cols}&h=${size * rows
+      }&fit=crop&auto=format&dpr=2 2x`,
   };
 }
 
+const documents = [
+  {
+    id: uuidv4(),
+    data: {
+      uid: uuidv4(),
+      uName: "Onos Brown",
+      uEmail: "onos@gmail.com",
+      uPhoto: "img/portfolio/masonry6-287x287.jpg",
+      imageURL: "img/portfolio/masonry6-287x287.jpg",
+      timestamp: moment()
+    },
+  },
+]
+
 export default function ImagesList() {
   const { currentUser } = useAuth();
-  const { documents } = useFirestore('gallery');
+
   return (
     <SimpleReactLightbox>
       <SRLWrapper>
