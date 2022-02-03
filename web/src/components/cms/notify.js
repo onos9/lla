@@ -2,7 +2,7 @@ import { Close } from '@mui/icons-material';
 import { Alert, Box, Collapse, IconButton } from '@mui/material';
 import { useEffect } from 'react';
 import { useRef } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/autoContext';
 
 const Notify = () => {
   const alertRef = useRef();

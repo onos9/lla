@@ -8,7 +8,7 @@ import { IconButton } from '@mui/material';
 import { Delete, MoreVert } from '@mui/icons-material';
 import deleteDocument from '../../firebase/deleteDocument';
 import deleteFile from '../../firebase/deleteFile';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/autoContext';
 
 export default function Options({ imageId }) {
   const [anchorEl, setAnchorEl] = React.useState(null);

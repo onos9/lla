@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import { useAuth } from '../../context/AuthContext';
-import getCroppedImg from './utils/cropImage';
+import { useAuth } from '../../context/autoContext';
+import getCroppedImg from '../../helpers/cropimage';
 
 const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
   const { setAlert, setLoading } = useAuth();

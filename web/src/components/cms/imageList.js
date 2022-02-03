@@ -4,9 +4,9 @@ import ImageListItem from '@mui/material/ImageListItem';
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox';
 import { Avatar, Tooltip, Typography } from '@mui/material';
 import moment from 'moment';
-import Options from './Options';
+import Options from './options';
 import useFirestore from '../../firebase/useFirestore';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/autoContext';
 
 function srcset(image, size, rows = 1, cols = 1) {
   return {

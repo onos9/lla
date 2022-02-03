@@ -2,8 +2,8 @@ export const InitServer = (component) => {
 
     media = {}
     const endpoint = `http://localhost:8080/images`;
-    let repos = await(await fetch(endpoint)).json()
-
+    let repos = await fetch(endpoint)
+    repos = await repos.json()
     if (repos === null) {
         let imgs = homeWrapper.current.getElementsByTagName("img")
         let m_urls = Array.from(imgs).map(img => img.src)
@@ -44,7 +44,8 @@ export const initMediaUpload = (e) => {
             },
             body: JSON.stringify(images)
         }
-        const respons = await(await fetch('http://localhost:8080/api/uploads/' + newFileName, options)).json()
+        const respons = await fetch('http://localhost:8080/api/uploads/' + newFileName, options)
+        respons = await respons.json()
         console.log("Respons", respons)
 
         return respons

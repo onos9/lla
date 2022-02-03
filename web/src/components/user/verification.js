@@ -2,7 +2,7 @@ import { Close } from '@mui/icons-material';
 import { Alert, Box, Button, Collapse, IconButton } from '@mui/material';
 import { sendEmailVerification } from 'firebase/auth';
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/autoContext';
 
 const Verification = () => {
   const { currentUser, setAlert, setLoading } = useAuth();

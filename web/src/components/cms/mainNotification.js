@@ -1,5 +1,5 @@
-import { useAuth } from '../context/AuthContext';
-import Notify from './Notify';
+import { useAuth } from '../../context/autoContext';
+import Notify from './notify';
 
 const MainNotification = () => {
   const {

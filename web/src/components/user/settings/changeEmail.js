@@ -1,9 +1,9 @@
 import { DialogActions, DialogContent, DialogContentText } from '@mui/material';
 import { updateEmail } from 'firebase/auth';
 import { useRef } from 'react';
-import { useAuth } from '../../../context/AuthContext';
-import EmailField from '../inputs/EmailField';
-import SubmitButton from '../inputs/SubmitButton';
+import { useAuth } from '../../../context/autoContext';
+import EmailField from '../inputs/emailField';
+import SubmitButton from '../inputs/submitButton';
 
 const ChangeEmail = () => {
   const { currentUser, setLoading, setAlert, setModal, modal } = useAuth();

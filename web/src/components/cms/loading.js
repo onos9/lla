@@ -1,5 +1,5 @@
 import { Backdrop, CircularProgress } from '@mui/material';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/autoContext';
 
 const Loading = () => {
   const { loading } = useAuth();

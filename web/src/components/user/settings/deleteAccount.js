@@ -6,8 +6,8 @@ import {
   DialogContentText,
 } from '@mui/material';
 import { deleteUser } from 'firebase/auth';
-import { useAuth } from '../../../context/AuthContext';
-import deleteUserFiles from '../../../firebase/deleteUserFiles';
+import { useAuth } from '../../../context/autoContext';
+import deleteUserFiles from '../../../firebase/deleteUserFile';
 
 const DeleteAccount = () => {
   const { currentUser, setLoading, setAlert, setModal, modal } = useAuth();

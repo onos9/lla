@@ -5,10 +5,10 @@ import {
     DialogContentText,
   } from '@mui/material';
   import { GoogleAuthProvider, reauthenticateWithPopup } from 'firebase/auth';
-  import { useAuth } from '../../../context/AuthContext';
-  import ChangeEmail from './ChangeEmail';
-  import DeleteAccount from './DeleteAccount';
-  import ReAuth from './ReAuth';
+  import { useAuth } from '../../../context/autoContext';
+  import ChangeEmail from './changeEmail';
+  import DeleteAccount from './deleteAccount';
+  import ReAuth from './reAuth';
   
   const AccountSettings = () => {
     const { currentUser, setModal, modal, setAlert } = useAuth();

@@ -1,9 +1,9 @@
 import { DialogActions, DialogContent, DialogContentText } from '@mui/material';
 import { updatePassword } from 'firebase/auth';
 import { useRef } from 'react';
-import { useAuth } from '../../../context/AuthContext';
-import PasswordField from '../inputs/PasswordField';
-import SubmitButton from '../inputs/SubmitButton';
+import { useAuth } from '../../../context/autoContext';
+import PasswordField from '../inputs/passwordField';
+import SubmitButton from '../inputs/submitButton';
 
 const ChangePassword = () => {
   const { currentUser, setLoading, setAlert, setModal, modal } = useAuth();

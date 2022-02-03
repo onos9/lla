@@ -11,10 +11,10 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Button } from '@mui/material';
 import { Lock } from '@mui/icons-material';
-import { useAuth } from '../context/AuthContext';
-import Login from './user/Login';
-import Profile from './user/Profile';
-import AccountSettings from './user/settings/AccountSettings';
+import { useAuth } from '../../context/autoContext';
+import Login from '../user/loging';
+import Profile from '../user/profile';
+import AccountSettings from '../user/settings/accountSettings';
 
 export default function Nav() {
   const [anchorEl, setAnchorEl] = React.useState(null);

@@ -7,11 +7,11 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import EmailField from './inputs/EmailField';
-import PasswordField from './inputs/PasswordField';
-import SubmitButton from './inputs/SubmitButton';
-import ResetPassword from './ResetPassword';
+import { useAuth } from '../../context/autoContext';
+import EmailField from './inputs/emailField';
+import PasswordField from './inputs/passwordField';
+import SubmitButton from './inputs/submitButton';
+import ResetPassword from './resetPassword';
 
 const Login = () => {
   const emailRef = useRef();

@@ -1,6 +1,6 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/autoContext';
 import { db } from './config';
 
 const useFirestore = (collectionName = 'gallery') => {

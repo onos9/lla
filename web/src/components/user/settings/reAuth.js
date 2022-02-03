@@ -1,12 +1,12 @@
 import { DialogActions, DialogContent, DialogContentText } from '@mui/material';
 import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 import { useRef } from 'react';
-import { useAuth } from '../../../context/AuthContext';
-import PasswordField from '../inputs/PasswordField';
-import SubmitButton from '../inputs/SubmitButton';
-import ChangeEmail from './ChangeEmail';
-import ChangePassword from './ChangePassword';
-import DeleteAccount from './DeleteAccount';
+import { useAuth } from '../../../context/autoContext';
+import PasswordField from '../inputs/passwordField';
+import SubmitButton from '../inputs/submitButton';
+import ChangeEmail from './changeEmail';
+import ChangePassword from './changePassword';
+import DeleteAccount from './deleteAccount';
 
 const ReAuth = ({ action }) => {
   const { currentUser, setLoading, setAlert, setModal, modal } = useAuth();
