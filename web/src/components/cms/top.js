@@ -1,3 +1,4 @@
+import { Link } from '@mui/material';
 import React from 'react';
 
 const Top = () => {
@@ -7,9 +8,9 @@ const Top = () => {
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="speedBar">
-                            <a className="home" href="index.html">Home</a>
+                            <Link className="home" to="index.html">Home</Link>
                             <span className="breadcrumbs_delimiter"> / </span>
-                            <a className="all" href="#">All Posts</a>
+                            <Link className="all" to="#">All Posts</Link>
                             <span className="breadcrumbs_delimiter"> / </span>
                             <span className="current">Post formats fullwidth</span>
                         </div>
@@ -19,34 +20,34 @@ const Top = () => {
                 <div className="tabsButton">
                     <ul className="nav-tabs sc_tabs_titles" role="tablist">
                         <li className="tab_names state-default active">
-                            <a className="theme_button" href="#tabBlog" role="tab" data-toggle="tab">
-                                <span>Blog</span>
-                            </a>
+                            <Link className="theme_button" to="#tabBlog" role="tab" data-toggle="tab">
+                                <span>Images</span>
+                            </Link>
                         </li>
                         <li className="tab_names state-default">
-                            <a className="theme_button" href="#calendar" role="tab" data-toggle="tab">
-                                <span>Calendar</span>
-                            </a>
+                            <Link className="theme_button" to="#calendar" role="tab" data-toggle="tab">
+                                <span>Videos</span>
+                            </Link>
                         </li>
                         <li className="tab_names state-default">
-                            <a href="#archives" role="tab" data-toggle="tab">
-                                <span>Archives</span>
-                            </a>
+                            <Link to="#archives" role="tab" data-toggle="tab">
+                                <span>Audios</span>
+                            </Link>
                         </li>
                         <li className="tab_names state-default">
-                            <a href="#flickr-widget" role="tab" data-toggle="tab">
-                                <span>Flickr Photos</span>
-                            </a>
+                            <Link to="#flickr-widget" role="tab" data-toggle="tab">
+                                <span>Documents</span>
+                            </Link>
                         </li>
                         <li className="tab_names state-default">
-                            <a href="#recent-posts-widget" role="tab" data-toggle="tab">
-                                <span>Recent Posts</span>
-                            </a>
+                            <Link to="#recent-posts-widget" role="tab" data-toggle="tab">
+                                <span>Animations</span>
+                            </Link>
                         </li>
                         <li className="tab_names state-default">
-                            <a href="#meta" role="tab" data-toggle="tab">
-                                <span>Meta</span>
-                            </a>
+                            <Link to="#meta" role="tab" data-toggle="tab">
+                                <span>Others</span>
+                            </Link>
                         </li>
                     </ul>
                 </div>

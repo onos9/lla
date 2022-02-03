@@ -1,7 +1,5 @@
 import React from "react"
-import { Container } from '@mui/material';
-
-import { TopOfPage } from "../components/site"
+import { Container } from '@mui/material'
 import { AuthContext } from "../context"
 import { Verification } from "../components/user"
 
@@ -13,59 +11,30 @@ import {
   MainNotification,
   Modal,
 } from "../components/cms"
-import Top from "../components/cms/top";
-import PageHeader from "../components/site/pageHeader";
+import Top from "../components/cms/top"
 
-const imagePool = [
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-  "img/portfolio/masonry6-287x287.jpg",
-]
 
 const CMS = () => {
-
-  const onClickHandler = (e) => {
-
-  }
-
   return (
     <main>
-      {/* <PageHeader /> */}
-      {/* <Top /> */}
-      <Container maxWidth="lg" sx={{ textAlign: 'center', mt: '3rem' }}>
+      <Top />
+      <Container maxWidth="lg" sx={ { textAlign: 'center', mt: '3rem' } }>
         <AuthContext>
-
           <Loading />
           <Modal />
           <Verification />
           <MainNotification />
           <Nav />
           <Upload />
-          <ImageList />
+          <div id="tabBlog">
+            <ImageList />
+          </div>
+          <div id="calender">
+
+          </div>
+          <div id="archives">
+
+          </div>
         </AuthContext>
       </Container>
 
