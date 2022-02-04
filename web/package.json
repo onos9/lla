@@ -22,7 +22,6 @@
     "react-photo-gallery": "^8.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
-    "simple-react-lightbox": "^3.6.9-0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },

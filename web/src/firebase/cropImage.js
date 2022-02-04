@@ -65,3 +65,40 @@ export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
         }, "image/jpeg")
     })
 }
+
+// To convert dataUrl (which we get from our blob) to a a file object
+export const dataURLtoFile = (dataurl, filename) => {
+    const arr = dataurl.split(",")
+    const mime = arr[0].match(/:(.*?);/)[1]
+    const bstr = atob(arr[1])
+    let n = bstr.length
+    const u8arr = new Uint8Array(n)
+
+    while (n--) u8arr[n] = bstr.charCodeAt(n)
+
+    return new File([u8arr], filename, { type: mime })
+}
+
+export const generateDownload = async (imageSrc, crop) => {
+    if (!crop || !imageSrc)
+    {
+        return
+    }
+
+    const canvas = await getCroppedImg(imageSrc, crop)
+
+    canvas.toBlob(
+        (blob) => {
+            const previewUrl = window.URL.createObjectURL(blob)
+
+            const anchor = document.createElement("a")
+            anchor.download = "image.jpeg"
+            anchor.href = URL.createObjectURL(blob)
+            anchor.click()
+
+            window.URL.revokeObjectURL(previewUrl)
+        },
+        "image/jpeg",
+        0.66
+    )
+}

@@ -1,4 +1,4 @@
-export const InitServer = (component) => {
+export const InitServer = async (component) => {
 
     media = {}
     const endpoint = `http://localhost:8080/images`;
@@ -26,7 +26,7 @@ export const InitServer = (component) => {
 
 }
 
-export const initMediaUpload = (e) => {
+export const initMediaUpload = async (e) => {
         e.preventDefault();
 
         // construct the form data and apply new file name
