@@ -1,34 +1,23 @@
-import React, { useState } from "react"
+import { Button, Slider } from "@mui/material"
+import React, { memo, useRef, useState } from "react"
 import Cropper from "react-easy-crop"
-import { dataURLtoFile, getCroppedImg } from "../../helpers/cropImage"
+import { blobToFile, dataURLtoFile, getCroppedImg } from "../../helpers/cropImage"
 
-const aspectRatios = [
-  { value: 4 / 3, text: "4/3" },
-  { value: 16 / 9, text: "16/9" },
-  { value: 1 / 2, text: "1/2" },
-]
-
-const ImageCropDialog = ({
+const ImageCropDialog = memo(({
   id,
   imageUrl,
-  cropInit,
-  zoomInit,
-  aspectInit,
-  onCancel,
   setCroppedImageFor,
   resetImage,
 }) => {
 
-  zoomInit = zoomInit ? zoomInit : 1
-  cropInit = cropInit ? cropInit : { x: 0, y: 0 }
-  aspectInit = aspectInit ? aspectInit : aspectRatios[0]
-
-  //console.log(aspectInit)
-
-  const [zoom, setZoom] = useState(zoomInit)
-  const [crop, setCrop] = useState(cropInit)
-  const [aspect, setAspect] = useState(aspectInit)
+  const fileName = imageUrl.split('/').pop()
+  const [image, setImage] = useState(imageUrl)
+  const [zoom, setZoom] = useState(1)
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+
+  const inputRef = useRef()
+  const triggerFileSelectPopup = () => inputRef.current.click()
 
   const onCropChange = (crop) => {
     setCrop(crop)
@@ -38,100 +27,122 @@ const ImageCropDialog = ({
     setZoom(zoom)
   }
 
-  const onAspectChange = (e) => {
-    const value = e.target.value
-    const ratio = aspectRatios.find((ratio) => ratio.value == value)
-    setAspect(ratio)
-  }
-
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
 
   const onCrop = async () => {
-    const croppedImageUrl = await getCroppedImg(imageUrl, croppedAreaPixels)
-    setCroppedImageFor(id, crop, zoom, aspect, croppedImageUrl)
+    const croppedImageUrl = await getCroppedImg(image, croppedAreaPixels)
+    setCroppedImageFor(id, crop, zoom, 1, croppedImageUrl)
   }
 
   const onResetImage = () => {
     resetImage(id)
   }
 
-  const onUpload = async (image, croppedArea) => {
+  const onUpload = async () => {
     if (!image) return
-
-    const canvas = await getCroppedImg(image, croppedArea)
-    const canvasDataUrl = canvas.toDataURL("image/jpeg")
-    const convertedUrlToFile = dataURLtoFile(canvasDataUrl, "cropped-image.jpeg")
-
-    // http://localhost:9000/api/users/setProfilePic
-    // console.log(convertedUrlToFile);
 
     try
     {
-      const formdata = new FormData()
-      formdata.append("croppedImage", convertedUrlToFile)
+      const blob = await getCroppedImg(image, croppedAreaPixels)
+      setCroppedImageFor(id, crop, zoom, 1, blob)
+      console.log("BLOB: ", blob)
+      const file = blobToFile(blob, fileName)
+      console.log("FILE: ", file)
 
-      const res = await fetch("http://localhost:9000/api/users/setProfilePic", {
-        method: "POST",
-        body: formdata,
-      })
+      //   const formdata = new FormData()
+      //   formdata.append("croppedImage", convertedUrlToFile)
 
-      res = await res.json()
-      console.log(res)
+      //   let resp = await fetch("http://localhost:9000/api/users/setProfilePic", {
+      //     method: "POST",
+      //     body: formdata,
+      //   })
+
+      //   resp = await res.json()
+      //   console.log(resp)
+
     } catch (err)
     {
-      console.warn(err)
+      console.warn("UPLOAD-ERROR: ", err.message)
+    }
+  }
+
+  const onSelectFile = (event) => {
+    if (event.target.files && event.target.files.length > 0)
+    {
+      const reader = new FileReader()
+      reader.readAsDataURL(event.target.files[0])
+      reader.addEventListener("load", () => {
+        setImage(reader.result)
+      })
     }
   }
 
   return (
-    <div className="backdrop row">
-      <div className="controls-button row">
-        <div className="button-area col-md-4">
-          <button onClick={ onCancel }>Cancel</button>
-          <button onClick={ onResetImage }>Reset</button>
-          <button onClick={ onCrop }>Crop</button>
-        </div>
-      </div>
-      <div className="crop-container row">
-        <Cropper
-          image={ imageUrl }
-          zoom={ zoom }
-          crop={ crop }
-          aspect={ aspect.value }
-          onCropChange={ onCropChange }
-          onZoomChange={ onZoomChange }
-          onCropComplete={ onCropComplete }
-        />
-      </div>
-      <div className="controls-slider row">
+    <div className='crop-dialog'>
+      <div className='container-buttons'>
         <input
-          type="range"
-          min={ 1 }
-          max={ 3 }
-          step={ 0.1 }
-          value={ zoom }
-          onInput={ (e) => {
-            onZoomChange(e.target.value)
-          } }
-          className="slider"
+          type='file'
+          accept='image/*'
+          ref={ inputRef }
+          onChange={ onSelectFile }
+          style={ { display: "none" } }
+        />
+
+        <Button
+          onClick={ () => onResetImage() }
+          variant='contained'
+          color='primary'
+          style={ { marginRight: "10px" } }
         >
-        </input>
-        <select onChange={ onAspectChange }>
-          { aspectRatios.map((ratio) => (
-            <option
-              key={ ratio.text }
-              value={ ratio.value }
-              defaultValue={ ratio.value === aspect.value }
-            >
-              { ratio.text }
-            </option>
-          )) }
-        </select>
+          Clear
+        </Button>
+        <Button
+          variant='contained'
+          color='primary'
+          onClick={ triggerFileSelectPopup }
+          style={ { marginRight: "10px" } }
+        >
+          Change
+        </Button>
+        <Button variant='contained' color='secondary' onClick={ onUpload }>
+          Upload
+        </Button>
       </div>
+      <div className='container-cropper'>
+        { imageUrl ? (
+          <>
+            <div className='cropper'>
+              <Cropper
+                image={ image }
+                crop={ crop }
+                zoom={ zoom }
+                aspect={ 1.4 }
+                onCropChange={ onCropChange }
+                onZoomChange={ onZoomChange }
+                onCropComplete={ onCropComplete }
+              />
+            </div>
+
+            <div className='slider'>
+              <Slider
+                min={ 1 }
+                max={ 3 }
+                step={ 0.1 }
+                value={ zoom }
+                onChange={ (e, zoom) => setZoom(zoom) }
+                color='success'
+              />
+            </div>
+          </>
+        ) : null }
+      </div>
+
+
     </div>
+
   )
-}
+})
 
 export default ImageCropDialog

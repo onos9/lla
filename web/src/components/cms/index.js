@@ -6,7 +6,7 @@
 import ImageList from './imageList'; 
 import Nav from './nav';
 import Upload from './uplaod'; 
-import CropEasy from './imageCropDialog'; 
+import ImageCropDialog from './imageCropDialog'; 
 import Loading from './loading'; 
 import MainNotification from './mainNotification'; 
 import Modal from './modal'; 
@@ -18,7 +18,7 @@ export {
     ImageList, 
     Nav,
     Upload,
-    CropEasy, 
+    ImageCropDialog, 
     Loading,
     MainNotification,
     Modal, 

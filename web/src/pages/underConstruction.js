@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useRef } from "react"
 import { TopOfPage } from "../components/site"
 
 const UnderConstruction = () => {
+  const underConstruction = useRef(null)
   return (
-    <main>
+    <main ref={underConstruction}>
       <TopOfPage />
       <section id="topOfPage" className="topTabsWrap color_section">
         <div className="container">

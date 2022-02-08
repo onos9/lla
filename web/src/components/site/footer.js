@@ -10,7 +10,7 @@ const Footer = () => {
                             <div className="widget_advert_inner">
                                 <h3 className="sc_title sc_title_iconed">
                                     <span className="sc_title_image sc_title_left sc_size_small">
-                                        <img src="img/logo/logo.png" alt="" />
+                                        <img src="img/logo/logo.png" alt="logo" />
                                     </span>
                                     Kindergarten
                                 </h3>

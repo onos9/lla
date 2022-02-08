@@ -1,10 +1,10 @@
-import React from "react"
+import React, { useRef } from "react"
 import { TopOfPage } from "../components/site"
 
 const Potfolio = () => {
-
+    const potfolio = useRef(null)
     return (
-        <main>
+        <main ref={potfolio}>
             <TopOfPage />
             <section className="portfolio_mansory_columns">
                 <div className="container">

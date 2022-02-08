@@ -1,10 +1,10 @@
-import React from "react"
+import React, { useRef } from "react"
 import { TopOfPage } from "../components/site"
 
 const Blog = () => {
-
+    const blog = useRef(null)
     return (
-        <main>
+        <main ref={blog}>
             <TopOfPage />
             <section className="mainWrap without_sidebar">
                 <div className="container" role="main">

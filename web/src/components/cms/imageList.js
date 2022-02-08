@@ -16,48 +16,14 @@ function srcset(image, size, rows = 1, cols = 1) {
   }
 }
 
-export default function ImagesList() {
+export default function ImagesList({ images, onOpen }) {
   const { currentUser } = useAuth()
-  const { documents } = useFirestore('gallery')
-  const [selected, setSelected] = useState(null)
-  const [images, setImages] = useState(documents)
-
-  const onCancel = () => {
-    setSelected(null)
-  }
-
-  const setCroppedImageFor = (id, crop, zoom, aspect, croppedImageUrl) => {
-    const newImageList = [...images];
-    const imageIndex = images.findIndex((x) => x.id === id)
-    const image = images[imageIndex]
-    const newImage = { ...image, croppedImageUrl, crop, zoom, aspect }
-    console.log(newImage)
-    newImageList[imageIndex] = newImage
-
-    setImages(newImageList)
-    setSelected(null)
-  }
-
-  const resetImage = (id) => {
-    setCroppedImageFor(id)
-  }
   return (
     <>
-      { selected ? (<ImageCropDialog
-        id={ selected.uid }
-        imageUrl={ selected.imageURL }
-        cropInit={ selected.crop }
-        zoomInit={ selected.zoom }
-        aspectInit={ selected.aspect }
-        onCancel={ onCancel }
-        setCroppedImageFor={ setCroppedImageFor }
-        resetImage={ resetImage }
-      />
-      ) : null }
       <ImageList variant="quilted" cols={ 4 } rowHeight={ 200 } >
         { images.map((item, index) => (
           <ImageListItem
-            onClick={ () => setSelected(item?.data) }
+            onClick={ () => onOpen(item?.data) }
             key={ item?.id }
             cols={
               pattern[

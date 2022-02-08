@@ -1,9 +1,9 @@
-import React from "react"
+import React, { useRef } from "react"
 
 const Product = () => {
-
+    const product = useRef(null)
     return (
-        <main>
+        <main ref={product}>
             <section>
                 <div className="container">
                     <div className="row">

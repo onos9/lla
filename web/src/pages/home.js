@@ -1,38 +1,36 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Footer, Header, Slider, UserHeader } from "../components/site"
+import { getLocalSitedata, request } from '../helpers/utils'
+import { v4 as uuidv4 } from 'uuid'
 
 const Home = () => {
 
-    const homeWrapper = useRef(null)
-    const _isMounted = useRef(false);
-    const [appState, setAppState] = useState({
-        loading: false,
-        repos: null,
-    });
-
+    const home = useRef(null)
     useEffect(async () => {
-
-        if (_isMounted.current) return
-        setAppState({ loading: true });
-
-        const endpoint = `http://localhost:8080/images`;
-        let repos = await (await fetch(endpoint)).json()
-
-        if (_isMounted.current) return
-        setAppState({ loading: false, repos: repos });
-
-        //console.log(repos)
-
-        if (repos === null) {
-            let images = homeWrapper.current.getElementsByTagName("img")
-            let src = Array.from(images).map(img => img.src)
-            console.log({ home: src })
+        const data = getLocalSitedata(home).map((img) => {
+            return {
+                id: uuidv4(),
+                images:{
+                iid: uuidv4(),
+                imageURL: img.src,
+                component: 'home',
+                    imageAlt: img.alt
+                },
+                texts:{}
+            }
+        })
+        console.log('Data: ', data)
+        try
+        {
+            const resp = await request('post', data)
+            console.log('API-RESPONS: ', resp)
+        } catch (error)
+        {
+            console.warn(error)
         }
-
     }, [])
-
     return (
-        <main ref={homeWrapper}>
+        <main ref={ home }>
             <Header />
             <Slider />
             <UserHeader />
@@ -43,8 +41,8 @@ const Home = () => {
                             <div className="row">
                                 <div className="col-sm-12">
                                     <div id="multi_slider" className="sc_slider_pagination_area sc_slider_pagination_full">
-                                        <div id="multi_slider_left" className="sc_slider sc_slider_swiper sc_slider_controls sc_slider_nopagination swiper-container slider-left swiper-container-horizontal" style={{ cursor: 'grab' }}>
-                                            <div className="slides swiper-wrapper" style={{ transitionDuration: '0ms', transform: 'translate3d(-2000px, 0px, 0px)' }}><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={0} style={{ width: 500 }}>
+                                        <div id="multi_slider_left" className="sc_slider sc_slider_swiper sc_slider_controls sc_slider_nopagination swiper-container slider-left swiper-container-horizontal" style={ { cursor: 'grab' } }>
+                                            <div className="slides swiper-wrapper" style={ { transitionDuration: '0ms', transform: 'translate3d(-2000px, 0px, 0px)' } }><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 0 } style={ { width: 500 } }>
                                                 <img src="img/slider/51-550x310.jpg" alt='true' />
                                                 <a href="#" title="Morbi eget rutrum" />
                                                 <div className="sc_slider_info content-slide">
@@ -76,8 +74,8 @@ const Home = () => {
                                                     <h2 className="sc_slider_subtitle">
                                                         <a href="#">Morbi eget rutrum</a></h2>
                                                 </div>
-                                            </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={1} style={{ width: 500 }}>
-                                                    <img src="img/slider/41-550x310.jpg" alt='true'/>
+                                            </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 1 } style={ { width: 500 } }>
+                                                    <img src="img/slider/41-550x310.jpg" alt='true' />
                                                     <a href="#" title="Nulla ut dictum est" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Nulla ut dictum est" />
@@ -108,8 +106,8 @@ const Home = () => {
                                                         <h2 className="sc_slider_subtitle">
                                                             <a href="#">Nulla ut dictum est</a></h2>
                                                     </div>
-                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={2} style={{ width: 500 }}>
-                                                    <img src="img/slider/4-550x310.jpg" alt='true'/>
+                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 2 } style={ { width: 500 } }>
+                                                    <img src="img/slider/4-550x310.jpg" alt='true' />
                                                     <a href="#" title="Phasellus pulvinar" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Phasellus pulvinar" />
@@ -140,8 +138,8 @@ const Home = () => {
                                                         <h2 className="sc_slider_subtitle">
                                                             <a href="#">Phasellus pulvinar</a></h2>
                                                     </div>
-                                                </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index={3} style={{ width: 500 }}>
-                                                    <img src="img/slider/3-550x310.jpg" alt='true'/>
+                                                </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index={ 3 } style={ { width: 500 } }>
+                                                    <img src="img/slider/3-550x310.jpg" alt='true' />
                                                     <a href="#" title="Cras pulvinar sodales" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Cras pulvinar sodales" />
@@ -173,8 +171,8 @@ const Home = () => {
                                                             <a href="#">Cras pulvinar sodales</a></h2>
                                                     </div>
                                                 </div>
-                                                <div className="swiper-slide swiper-slide-active" data-swiper-slide-index={0} style={{ width: 500 }}>
-                                                    <img src="img/slider/51-550x310.jpg" alt='true'/>
+                                                <div className="swiper-slide swiper-slide-active" data-swiper-slide-index={ 0 } style={ { width: 500 } }>
+                                                    <img src="img/slider/51-550x310.jpg" alt='true' />
                                                     <a href="#" title="Morbi eget rutrum" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Morbi eget rutrum" />
@@ -206,8 +204,8 @@ const Home = () => {
                                                             <a href="#">Morbi eget rutrum</a></h2>
                                                     </div>
                                                 </div>
-                                                <div className="swiper-slide swiper-slide-next" data-swiper-slide-index={1} style={{ width: 500 }}>
-                                                    <img src="img/slider/41-550x310.jpg" alt='true'/>
+                                                <div className="swiper-slide swiper-slide-next" data-swiper-slide-index={ 1 } style={ { width: 500 } }>
+                                                    <img src="img/slider/41-550x310.jpg" alt='true' />
                                                     <a href="#" title="Nulla ut dictum est" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Nulla ut dictum est" />
@@ -239,8 +237,8 @@ const Home = () => {
                                                             <a href="#">Nulla ut dictum est</a></h2>
                                                     </div>
                                                 </div>
-                                                <div className="swiper-slide" data-swiper-slide-index={2} style={{ width: 500 }}>
-                                                    <img src="img/slider/4-550x310.jpg" alt='true'/>
+                                                <div className="swiper-slide" data-swiper-slide-index={ 2 } style={ { width: 500 } }>
+                                                    <img src="img/slider/4-550x310.jpg" alt='true' />
                                                     <a href="#" title="Phasellus pulvinar" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Phasellus pulvinar" />
@@ -272,8 +270,8 @@ const Home = () => {
                                                             <a href="#">Phasellus pulvinar</a></h2>
                                                     </div>
                                                 </div>
-                                                <div className="swiper-slide" data-swiper-slide-index={3} style={{ width: 500 }}>
-                                                    <img src="img/slider/3-550x310.jpg" alt='true'/>
+                                                <div className="swiper-slide" data-swiper-slide-index={ 3 } style={ { width: 500 } }>
+                                                    <img src="img/slider/3-550x310.jpg" alt='true' />
                                                     <a href="#" title="Cras pulvinar sodales" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Cras pulvinar sodales" />
@@ -305,8 +303,8 @@ const Home = () => {
                                                             <a href="#">Cras pulvinar sodales</a></h2>
                                                     </div>
                                                 </div>
-                                                <div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={0} style={{ width: 500 }}>
-                                                    <img src="img/slider/51-550x310.jpg" alt='true'/>
+                                                <div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 0 } style={ { width: 500 } }>
+                                                    <img src="img/slider/51-550x310.jpg" alt='true' />
                                                     <a href="#" title="Morbi eget rutrum" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Morbi eget rutrum" />
@@ -337,8 +335,8 @@ const Home = () => {
                                                         <h2 className="sc_slider_subtitle">
                                                             <a href="#">Morbi eget rutrum</a></h2>
                                                     </div>
-                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={1} style={{ width: 500 }}>
-                                                    <img src="img/slider/41-550x310.jpg" alt='true'/>
+                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 1 } style={ { width: 500 } }>
+                                                    <img src="img/slider/41-550x310.jpg" alt='true' />
                                                     <a href="#" title="Nulla ut dictum est" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Nulla ut dictum est" />
@@ -369,8 +367,8 @@ const Home = () => {
                                                         <h2 className="sc_slider_subtitle">
                                                             <a href="#">Nulla ut dictum est</a></h2>
                                                     </div>
-                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={2} style={{ width: 500 }}>
-                                                    <img src="img/slider/4-550x310.jpg" alt='true'/>
+                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 2 } style={ { width: 500 } }>
+                                                    <img src="img/slider/4-550x310.jpg" alt='true' />
                                                     <a href="#" title="Phasellus pulvinar" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Phasellus pulvinar" />
@@ -401,8 +399,8 @@ const Home = () => {
                                                         <h2 className="sc_slider_subtitle">
                                                             <a href="#">Phasellus pulvinar</a></h2>
                                                     </div>
-                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={3} style={{ width: 500 }}>
-                                                    <img src="img/slider/3-550x310.jpg" alt='true'/>
+                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 3 } style={ { width: 500 } }>
+                                                    <img src="img/slider/3-550x310.jpg" alt='true' />
                                                     <a href="#" title="Cras pulvinar sodales" />
                                                     <div className="sc_slider_info content-slide">
                                                         <a href="#" title="Cras pulvinar sodales" />
@@ -444,8 +442,8 @@ const Home = () => {
                                             </ul>
                                         </div>
                                         <div className="flex-control-nav manual">
-                                            <div id="multi_slider_right" className="sc_scroll sc_scroll_vertical swiper-container gallery-thumbs scroll-container slider-right swiper-container-vertical" style={{ cursor: 'grab' }}>
-                                                <div className="sc_scroll_wrapper swiper-wrapper" style={{ transitionDuration: '0ms', transform: 'translate3d(0px, -310px, 0px)' }}><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={0} style={{ height: '103.333px' }}>
+                                            <div id="multi_slider_right" className="sc_scroll sc_scroll_vertical swiper-container gallery-thumbs scroll-container slider-right swiper-container-vertical" style={ { cursor: 'grab' } }>
+                                                <div className="sc_scroll_wrapper swiper-wrapper" style={ { transitionDuration: '0ms', transform: 'translate3d(0px, -310px, 0px)' } }><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 0 } style={ { height: '103.333px' } }>
                                                     <div className="slide_pager">
                                                         <div className="slide_date">07.05.14</div>
                                                         <div className="slide_info">
@@ -455,7 +453,7 @@ const Home = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={1} style={{ height: '103.333px' }}>
+                                                </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 1 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">28.04.14</div>
                                                             <div className="slide_info">
@@ -465,7 +463,7 @@ const Home = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={2} style={{ height: '103.333px' }}>
+                                                    </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 2 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">21.04.14</div>
                                                             <div className="slide_info">
@@ -475,7 +473,7 @@ const Home = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index={3} style={{ height: '103.333px' }}>
+                                                    </div><div className="swiper-slide swiper-slide-duplicate swiper-slide-prev" data-swiper-slide-index={ 3 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">15.03.14</div>
                                                             <div className="slide_info">
@@ -486,7 +484,7 @@ const Home = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="swiper-slide swiper-slide-active" data-swiper-slide-index={0} style={{ height: '103.333px' }}>
+                                                    <div className="swiper-slide swiper-slide-active" data-swiper-slide-index={ 0 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">07.05.14</div>
                                                             <div className="slide_info">
@@ -497,7 +495,7 @@ const Home = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="swiper-slide swiper-slide-next" data-swiper-slide-index={1} style={{ height: '103.333px' }}>
+                                                    <div className="swiper-slide swiper-slide-next" data-swiper-slide-index={ 1 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">28.04.14</div>
                                                             <div className="slide_info">
@@ -508,7 +506,7 @@ const Home = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="swiper-slide" data-swiper-slide-index={2} style={{ height: '103.333px' }}>
+                                                    <div className="swiper-slide" data-swiper-slide-index={ 2 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">21.04.14</div>
                                                             <div className="slide_info">
@@ -519,7 +517,7 @@ const Home = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="swiper-slide" data-swiper-slide-index={3} style={{ height: '103.333px' }}>
+                                                    <div className="swiper-slide" data-swiper-slide-index={ 3 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">15.03.14</div>
                                                             <div className="slide_info">
@@ -530,7 +528,7 @@ const Home = () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={0} style={{ height: '103.333px' }}>
+                                                    <div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 0 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">07.05.14</div>
                                                             <div className="slide_info">
@@ -540,7 +538,7 @@ const Home = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={1} style={{ height: '103.333px' }}>
+                                                    </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 1 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">28.04.14</div>
                                                             <div className="slide_info">
@@ -550,7 +548,7 @@ const Home = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={2} style={{ height: '103.333px' }}>
+                                                    </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 2 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">21.04.14</div>
                                                             <div className="slide_info">
@@ -560,7 +558,7 @@ const Home = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={3} style={{ height: '103.333px' }}>
+                                                    </div><div className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={ 3 } style={ { height: '103.333px' } }>
                                                         <div className="slide_pager">
                                                             <div className="slide_date">15.03.14</div>
                                                             <div className="slide_info">
@@ -580,19 +578,19 @@ const Home = () => {
                             <div className="sc_line sc_line_style_shadow margin_top_big" />
                             <div className="row">
                                 <div className="col-md-6 col-sm-12">
-                                    <div className="sc_tabs sc_tabs_style_2 inited ui-tabs ui-widget ui-widget-content ui-corner-all" data-active={0}>
+                                    <div className="sc_tabs sc_tabs_style_2 inited ui-tabs ui-widget ui-widget-content ui-corner-all" data-active={ 0 }>
                                         <ul className="sc_tabs_titles ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-                                            <li className="tab_names ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabIndex={0} aria-controls="tab5_popular" aria-labelledby="tab4_tab" aria-selected="true" aria-expanded="true">
-                                                <a href="#tab5_popular" className="theme_button ui-tabs-anchor" id="tab4_tab" role="presentation" tabIndex={-1}>POPULAR</a>
+                                            <li className="tab_names ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabIndex={ 0 } aria-controls="tab5_popular" aria-labelledby="tab4_tab" aria-selected="true" aria-expanded="true">
+                                                <a href="#tab5_popular" className="theme_button ui-tabs-anchor" id="tab4_tab" role="presentation" tabIndex={ -1 }>POPULAR</a>
                                             </li>
-                                            <li className="tab_names ui-state-default ui-corner-top" role="tab" tabIndex={-1} aria-controls="tab5_recent" aria-labelledby="tab5_tab" aria-selected="false" aria-expanded="false">
-                                                <a href="#tab5_recent" className="theme_button ui-tabs-anchor" id="tab5_tab" role="presentation" tabIndex={-1}>RECENT</a>
+                                            <li className="tab_names ui-state-default ui-corner-top" role="tab" tabIndex={ -1 } aria-controls="tab5_recent" aria-labelledby="tab5_tab" aria-selected="false" aria-expanded="false">
+                                                <a href="#tab5_recent" className="theme_button ui-tabs-anchor" id="tab5_tab" role="presentation" tabIndex={ -1 }>RECENT</a>
                                             </li>
-                                            <li className="tab_names ui-state-default ui-corner-top" role="tab" tabIndex={-1} aria-controls="tab5_commented" aria-labelledby="tab6_tab" aria-selected="false" aria-expanded="false">
-                                                <a href="#tab5_commented" className="theme_button ui-tabs-anchor" id="tab6_tab" role="presentation" tabIndex={-1}>COMMENTED</a>
+                                            <li className="tab_names ui-state-default ui-corner-top" role="tab" tabIndex={ -1 } aria-controls="tab5_commented" aria-labelledby="tab6_tab" aria-selected="false" aria-expanded="false">
+                                                <a href="#tab5_commented" className="theme_button ui-tabs-anchor" id="tab6_tab" role="presentation" tabIndex={ -1 }>COMMENTED</a>
                                             </li>
                                         </ul>
-                                        <div id="tab5_popular" className="sc_tabs_content ui-tabs-panel ui-widget-content ui-corner-bottom" aria-labelledby="tab4_tab" role="tabpanel" aria-hidden="false" style={{ display: 'block' }}>
+                                        <div id="tab5_popular" className="sc_tabs_content ui-tabs-panel ui-widget-content ui-corner-bottom" aria-labelledby="tab4_tab" role="tabpanel" aria-hidden="false" style={ { display: 'block' } }>
                                             <div className="sc_blogger sc_blogger_vertical style_regular no_description">
                                                 <article className="sc_blogger_item">
                                                     <h4 className="sc_blogger_title sc_title">
@@ -761,7 +759,7 @@ const Home = () => {
                                                 </article>
                                             </div>
                                         </div>
-                                        <div id="tab5_recent" className="sc_tabs_content ui-tabs-panel ui-widget-content ui-corner-bottom" aria-labelledby="tab5_tab" role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
+                                        <div id="tab5_recent" className="sc_tabs_content ui-tabs-panel ui-widget-content ui-corner-bottom" aria-labelledby="tab5_tab" role="tabpanel" aria-hidden="true" style={ { display: 'none' } }>
                                             <div className="sc_blogger sc_blogger_vertical style_regular no_description">
                                                 <article className="sc_blogger_item">
                                                     <h4 className="sc_blogger_title sc_title">
@@ -930,7 +928,7 @@ const Home = () => {
                                                 </article>
                                             </div>
                                         </div>
-                                        <div id="tab5_commented" className="sc_tabs_content ui-tabs-panel ui-widget-content ui-corner-bottom" aria-labelledby="tab6_tab" role="tabpanel" aria-hidden="true" style={{ display: 'none' }}>
+                                        <div id="tab5_commented" className="sc_tabs_content ui-tabs-panel ui-widget-content ui-corner-bottom" aria-labelledby="tab6_tab" role="tabpanel" aria-hidden="true" style={ { display: 'none' } }>
                                             <div className="sc_blogger sc_blogger_vertical style_regular no_description">
                                                 <article className="sc_blogger_item">
                                                     <h4 className="sc_blogger_title sc_title">
@@ -1103,9 +1101,9 @@ const Home = () => {
                                     <div>
                                         <div className="sc_timeline timeline_s4 style_date sc_scroll_controls">
                                             <h2 className="sc_title margin_bottom_small">Timeline</h2>
-                                            <div id="swiper_container_16" className="sc_scroll sc_scroll_vertical swiper-container_16 swiper-container-vertical swiper-container-free-mode" style={{ cursor: 'grab' }}>
+                                            <div id="swiper_container_16" className="sc_scroll sc_scroll_vertical swiper-container_16 swiper-container-vertical swiper-container-free-mode" style={ { cursor: 'grab' } }>
                                                 <div className="sc_blogger sc_blogger_vertical style_date swiper-wrapper">
-                                                    <div className="sc_timeline_item sc_scroll_slide swiper-slide swiper-slide-active" style={{ height: '106.667px' }}>
+                                                    <div className="sc_timeline_item sc_scroll_slide swiper-slide swiper-slide-active" style={ { height: '106.667px' } }>
                                                         <article className="sc_blogger_item">
                                                             <div className="sc_blogger_date">
                                                                 <span className="day_month">08.03</span>
@@ -1123,7 +1121,7 @@ const Home = () => {
                                                             </div>
                                                         </article>
                                                     </div>
-                                                    <div className="sc_timeline_item sc_scroll_slide swiper-slide swiper-slide-next" style={{ height: '106.667px' }}>
+                                                    <div className="sc_timeline_item sc_scroll_slide swiper-slide swiper-slide-next" style={ { height: '106.667px' } }>
                                                         <article className="sc_blogger_item">
                                                             <div className="sc_blogger_date">
                                                                 <span className="day_month">03.03</span>
@@ -1141,7 +1139,7 @@ const Home = () => {
                                                             </div>
                                                         </article>
                                                     </div>
-                                                    <div className="sc_timeline_item sc_scroll_slide swiper-slide" style={{ height: '106.667px' }}>
+                                                    <div className="sc_timeline_item sc_scroll_slide swiper-slide" style={ { height: '106.667px' } }>
                                                         <article className="sc_blogger_item">
                                                             <div className="sc_blogger_date">
                                                                 <span className="day_month">28.02</span>
@@ -1159,7 +1157,7 @@ const Home = () => {
                                                             </div>
                                                         </article>
                                                     </div>
-                                                    <div className="sc_timeline_item sc_scroll_slide swiper-slide" style={{ height: '106.667px' }}>
+                                                    <div className="sc_timeline_item sc_scroll_slide swiper-slide" style={ { height: '106.667px' } }>
                                                         <article className="sc_blogger_item sc_blogger_item_last">
                                                             <div className="sc_blogger_date">
                                                                 <span className="day_month">26.02</span>
@@ -1178,7 +1176,7 @@ const Home = () => {
                                                         </article>
                                                     </div>
                                                 </div>
-                                                <div className="swiper-scrollbar16 sc_scroll_bar" style={{ opacity: 0 }}><div className="swiper-scrollbar-drag" style={{ height: 240 }} /></div>
+                                                <div className="swiper-scrollbar16 sc_scroll_bar" style={ { opacity: 0 } }><div className="swiper-scrollbar-drag" style={ { height: 240 } } /></div>
                                             </div>
                                             <ul className="flex-direction-nav">
                                                 <li>
@@ -1496,7 +1494,7 @@ const Home = () => {
                                             </h4>
                                             <div className="reviews_summary blog_reviews">
                                                 <div className="criteria_summary criteria_row">
-                                                    <div className="ratingItem" data-mark={100}>
+                                                    <div className="ratingItem" data-mark={ 100 }>
                                                         <div className="starDefault">
                                                             <span className="starReview" />
                                                             <span className="starReview" />
@@ -1843,10 +1841,10 @@ const Home = () => {
                                                 <tr>
                                                     <th className="prevMonth">
                                                         <div className="left roundButton">
-                                                            <a href="#" data-type="post" data-year={2014} data-month={5} title="View posts for May 2014" />
+                                                            <a href="#" data-type="post" data-year={ 2014 } data-month={ 5 } title="View posts for May 2014" />
                                                         </div>
                                                     </th>
-                                                    <th className="curMonth" colSpan={5}>
+                                                    <th className="curMonth" colSpan={ 5 }>
                                                         <a href="#" title="View posts for July 2015">
                                                             July
                                                             <span>2015</span>
@@ -1854,7 +1852,7 @@ const Home = () => {
                                                     </th>
                                                     <th className="nextMonth">
                                                         <div className="right roundButton">
-                                                            <a href="#" data-type="post" data-year={2014} data-month={5} title="View posts for May 2014" />
+                                                            <a href="#" data-type="post" data-year={ 2014 } data-month={ 5 } title="View posts for May 2014" />
                                                         </div>
                                                     </th>
                                                 </tr>
@@ -1870,7 +1868,7 @@ const Home = () => {
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td colSpan={2} className="pad">&nbsp;</td>
+                                                    <td colSpan={ 2 } className="pad">&nbsp;</td>
                                                     <td>1</td>
                                                     <td>2</td>
                                                     <td>3</td>
@@ -1910,7 +1908,7 @@ const Home = () => {
                                                     <td className="today">29</td>
                                                     <td>30</td>
                                                     <td>31</td>
-                                                    <td className="pad" colSpan={2}>&nbsp;</td>
+                                                    <td className="pad" colSpan={ 2 }>&nbsp;</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -1984,17 +1982,17 @@ const Home = () => {
                                     <h3 className="title">Popular</h3>
                                     <div className="popular_and_commented_tabs tabs_area inited ui-tabs ui-widget ui-widget-content ui-corner-all">
                                         <ul className="tabs ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
-                                            <li className="squareButtonlite ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" aria-controls="widget_popular_1" tabIndex={0} aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
-                                                <a href="#widget_popular_1" className="ui-tabs-anchor" role="presentation" tabIndex={-1} id="ui-id-1">Views</a>
+                                            <li className="squareButtonlite ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" aria-controls="widget_popular_1" tabIndex={ 0 } aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true">
+                                                <a href="#widget_popular_1" className="ui-tabs-anchor" role="presentation" tabIndex={ -1 } id="ui-id-1">Views</a>
                                             </li>
-                                            <li className="squareButtonlite ui-state-default ui-corner-top" role="tab" aria-controls="widget_popular_2" tabIndex={-1} aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
-                                                <a href="#widget_popular_2" className="ui-tabs-anchor" role="presentation" tabIndex={-1} id="ui-id-2">Comments</a>
+                                            <li className="squareButtonlite ui-state-default ui-corner-top" role="tab" aria-controls="widget_popular_2" tabIndex={ -1 } aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false">
+                                                <a href="#widget_popular_2" className="ui-tabs-anchor" role="presentation" tabIndex={ -1 } id="ui-id-2">Comments</a>
                                             </li>
-                                            <li className="squareButtonlite ui-state-default ui-corner-top" role="tab" aria-controls="widget_popular_3" tabIndex={-1} aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
-                                                <a href="#widget_popular_3" className="ui-tabs-anchor" role="presentation" tabIndex={-1} id="ui-id-3">Likes</a>
+                                            <li className="squareButtonlite ui-state-default ui-corner-top" role="tab" aria-controls="widget_popular_3" tabIndex={ -1 } aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false">
+                                                <a href="#widget_popular_3" className="ui-tabs-anchor" role="presentation" tabIndex={ -1 } id="ui-id-3">Likes</a>
                                             </li>
                                         </ul>
-                                        <div className="tab_content ui-tabs-panel ui-widget-content ui-corner-bottom" id="widget_popular_1" role="tabpanel" aria-labelledby="ui-id-1" aria-hidden="false" style={{ display: 'block' }}>
+                                        <div className="tab_content ui-tabs-panel ui-widget-content ui-corner-bottom" id="widget_popular_1" role="tabpanel" aria-labelledby="ui-id-1" aria-hidden="false" style={ { display: 'block' } }>
                                             <article className="post_item no_thumb">
                                                 <h5 className="post_title">
                                                     <a href="images_style_1.html">Maecenas tristique sem ante</a>
@@ -2080,7 +2078,7 @@ const Home = () => {
                                                 </div>
                                             </article>
                                         </div>
-                                        <div className="tab_content ui-tabs-panel ui-widget-content ui-corner-bottom" id="widget_popular_2" role="tabpanel" aria-labelledby="ui-id-2" aria-hidden="true" style={{ display: 'none' }}>
+                                        <div className="tab_content ui-tabs-panel ui-widget-content ui-corner-bottom" id="widget_popular_2" role="tabpanel" aria-labelledby="ui-id-2" aria-hidden="true" style={ { display: 'none' } }>
                                             <article className="post_item no_thumb">
                                                 <h5 className="post_title">
                                                     <a href="images_style_1.html">Unique Blog Style!</a>
@@ -2166,7 +2164,7 @@ const Home = () => {
                                                 </div>
                                             </article>
                                         </div>
-                                        <div className="tab_content ui-tabs-panel ui-widget-content ui-corner-bottom" id="widget_popular_3" role="tabpanel" aria-labelledby="ui-id-3" aria-hidden="true" style={{ display: 'none' }}>
+                                        <div className="tab_content ui-tabs-panel ui-widget-content ui-corner-bottom" id="widget_popular_3" role="tabpanel" aria-labelledby="ui-id-3" aria-hidden="true" style={ { display: 'none' } }>
                                             <article className="post_item no_thumb">
                                                 <h5 className="post_title">
                                                     <a href="images_style_1.html">Unique Blog Style!</a>

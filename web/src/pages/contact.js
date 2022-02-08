@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useRef } from "react"
 import { TopOfPage } from "../components/site"
 
 const Contact = () => {
+    const contact = useRef(null)
     return (
-        <main>
+        <main ref={contact}>
             <TopOfPage />
             <section className="mainWrap">
                 <div className="container">

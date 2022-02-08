@@ -1,10 +1,10 @@
-import React from "react"
+import React, { useRef } from "react"
 import { TopOfPage } from "../components/site"
 
 const Pricing = () => {
-
+    const pricing = useRef(null)
     return (
-        <main>
+        <main ref={pricing}>
             <TopOfPage />
             <section className="mainWrap with_sidebar sideBarLeft post">
                 <div className="container">

@@ -1,53 +1,30 @@
-export const InitServer = async (component) => {
 
-    media = {}
-    const endpoint = `http://localhost:8080/images`;
-    let repos = await fetch(endpoint)
-    repos = await repos.json()
-    if (repos === null) {
-        let imgs = homeWrapper.current.getElementsByTagName("img")
-        let m_urls = Array.from(imgs).map(img => img.src)
-        media[component] = image_urls
-        console.log("Images:", media)
-
-        options = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(media)
-        }
-        const respons = await(await fetch('http://localhost:8080/images', options)).json()
-        console.log("Respons", respons)
-
-        return respons
+export const request = async (method, body) => {
+    const options = {
+        method: method,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
     }
+    const respons = await fetch('http://localhost:8080/api/' + body.component, options)
+    respons = await respons.json()
+    console.log("RESPONS: ", respons)
 
+    return respons
 }
 
-export const initMediaUpload = async (e) => {
-        e.preventDefault();
-
-        // construct the form data and apply new file name
-        var file = e.get(0).files[0];
-
-        var newFileName = file.filename + "new";
-        var formData = new FormData();
-        formData.append('file', file, newFileName);
-
-        options = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(images)
+export const getLocalSitedata = (main) => {
+    let images = main.current.getElementsByTagName("img")
+    let img = Array.from(images).map((img) => {
+        return {
+            src: img.src,
+            alt: img.alt
         }
-        const respons = await fetch('http://localhost:8080/api/uploads/' + newFileName, options)
-        respons = await respons.json()
-        console.log("Respons", respons)
-
-        return respons
+    })
+    img = [...new Map(img.map(item => [item['src'], item])).values()]
+    console.log("IMAGE: ", img)
+    return img
 }
 

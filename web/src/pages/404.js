@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useRef } from "react"
 
 const NotFound = () => {
+    const notFound = useRef(null)
 
     return (
-        <main>
+        <main ref={notFound}>
             <section className="mainWrap with_sidebar sideBarLeft">
                 <div className="container" role="main">
                     <div className="row content">

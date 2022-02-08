@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef } from "react"
 import { Container } from '@mui/material'
 import { AuthContext } from "../context"
 import { Verification } from "../components/user"
@@ -12,11 +12,13 @@ import {
   Modal,
 } from "../components/cms"
 import Top from "../components/cms/top"
+import CropperDialog from "../components/cms/dialog"
 
 
 const CMS = () => {
+  const cms = useRef(null)
   return (
-    <main>
+    <main ref={cms}>
       <Top />
       <Container maxWidth="lg" sx={ { textAlign: 'center', mt: '3rem' } }>
         <AuthContext>
@@ -27,7 +29,7 @@ const CMS = () => {
           <Nav />
           <Upload />
           <div id="tabBlog">
-            <ImageList />
+            <CropperDialog />
           </div>
           <div id="calender">
 
