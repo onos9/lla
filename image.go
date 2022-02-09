@@ -14,7 +14,7 @@ type Image struct {
 
 type Typography struct {
 	Text string `json:"text"`
-	key  string `json:"key"`
+	Key  string `json:"key"`
 }
 
 type SiteContent []SiteData

@@ -10,7 +10,7 @@ export const request = async (method, body) => {
         },
         body: JSON.stringify(body)
     }
-    const respons = await fetch('http://localhost:8080/api/content')
+    const respons = await fetch('http://localhost:8080/api/content', options)
     respons = await respons.json()
     console.log("RESPONS: ", respons)
 

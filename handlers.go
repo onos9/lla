@@ -20,14 +20,14 @@ type spaHandler struct {
 	indexPath  string
 }
 
-var images Categories
+var content SiteContent
 
 const MAX_UPLOAD_SIZE = 1024 * 1024 // 1MB
 
 func getAll(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(images); err != nil {
+	if err := json.NewEncoder(w).Encode(content); err != nil {
 		panic(err)
 	}
 }
@@ -35,14 +35,14 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 func create(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 
-	var c Category
-	err := decoder.Decode(&c)
+	var d SiteData
+	err := decoder.Decode(&d)
 	if err != nil {
 		panic(err)
 	}
 
-	images := append(images, c)
-	fmt.Println(images)
+	data := append(content, d)
+	fmt.Println(data)
 }
 
 // This function returns the filename(to save in database) of the saved file
@@ -108,7 +108,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 // is suitable behavior for serving an SPA (single page application).
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
-	w.WriteHeader(http.StatusOK)
+	//w.WriteHeader(http.StatusOK)
 
 	// get the absolute path to prevent directory traversal
 	path, err := filepath.Abs(r.URL.Path)
