@@ -39,7 +39,7 @@ export const getLocalSitedata = ({ ref, component }) => {
         _id: uuidv4(),
         component: component,
         images: imgs,
-        typography: {}
+        typographies: {}
     }
 }
 
