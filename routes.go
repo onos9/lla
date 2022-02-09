@@ -15,13 +15,13 @@ var routes = Routes{
 	Route{
 		"getAll",
 		"GET",
-		"api/multimedia",
+		"api/content",
 		getAll,
 	},
 	Route{
 		"create",
 		"POST",
-		"api/multimedia",
+		"api/content",
 		create,
 	},
 	Route{

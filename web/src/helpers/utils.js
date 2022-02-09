@@ -1,3 +1,5 @@
+import { typography } from "@mui/system"
+import { v4 as uuidv4 } from "uuid"
 
 export const request = async (method, body) => {
     const options = {
@@ -8,23 +10,36 @@ export const request = async (method, body) => {
         },
         body: JSON.stringify(body)
     }
-    const respons = await fetch('http://localhost:8080/api/' + body.component, options)
+    const respons = await fetch('http://localhost:8080/api/content')
     respons = await respons.json()
     console.log("RESPONS: ", respons)
 
     return respons
 }
 
-export const getLocalSitedata = (main) => {
-    let images = main.current.getElementsByTagName("img")
-    let img = Array.from(images).map((img) => {
+export const getLocalSitedata = ({ ref, component }) => {
+    const images = ref.current.getElementsByTagName("img")
+    let urls = Array.from(images).map((img) => img.src)
+
+    // get background images and push into the urls array
+    const body = document.querySelector('body')
+    const style = window.getComputedStyle(body, false)
+    urls.push(style.backgroundImage.slice(4, -1).replace(/"/g, ""))
+    urls = [...new Set(urls)]
+
+    // construct site image structure
+    let imgs = urls.map((url) => {
         return {
-            src: img.src,
-            alt: img.alt
+            path: (new URL(url)).pathname,
+            filename: url.split('/').pop()
         }
     })
-    img = [...new Map(img.map(item => [item['src'], item])).values()]
-    console.log("IMAGE: ", img)
-    return img
+
+    return {
+        _id: uuidv4(),
+        component: component,
+        images: imgs,
+        typography: {}
+    }
 }
 

@@ -5,20 +5,10 @@ import { v4 as uuidv4 } from 'uuid'
 
 const Home = () => {
 
-    const home = useRef(null)
+    const ref = useRef(null)
     useEffect(async () => {
-        const data = getLocalSitedata(home).map((img) => {
-            return {
-                id: uuidv4(),
-                images:{
-                iid: uuidv4(),
-                imageURL: img.src,
-                component: 'home',
-                    imageAlt: img.alt
-                },
-                texts:{}
-            }
-        })
+        const opt = { ref:ref, component: 'home' }
+        const data = getLocalSitedata(opt)
         console.log('Data: ', data)
         try
         {
@@ -30,7 +20,7 @@ const Home = () => {
         }
     }, [])
     return (
-        <main ref={ home }>
+        <main ref={ ref }>
             <Header />
             <Slider />
             <UserHeader />
