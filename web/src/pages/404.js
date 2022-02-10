@@ -1,10 +1,12 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 
-const NotFound = () => {
+const NotFound = ({ post }) => {
     const notFound = useRef(null)
-
+    useEffect(() => {
+        post(notFound)
+    }, [])
     return (
-        <main ref={notFound}>
+        <notfound is="x3d" ref={ notFound }>
             <section className="mainWrap with_sidebar sideBarLeft">
                 <div className="container" role="main">
                     <div className="row content">
@@ -28,7 +30,7 @@ const NotFound = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </notfound>
     )
 }
 

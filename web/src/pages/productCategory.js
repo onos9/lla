@@ -1,9 +1,12 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 
-const ProductCategory = () => {
+const ProductCategory = ({post}) => {
     const productCategory = useRef(null)
+    useEffect(() => {
+        post(productCategory)
+    }, [])
     return (
-        <main ref={productCategory}>
+        <productcategory is="x3d" ref={productCategory}>
             <section>
                 <div className="container">
                     <div className="row">
@@ -139,7 +142,7 @@ const ProductCategory = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </productcategory>
     )
 }
 

@@ -1,10 +1,14 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
+import { useLocation } from "react-router-dom"
 import { TopOfPage } from "../components/site"
 
-const About = () => {
+const About = ({ post }) => {
     const about = useRef(null)
+    useEffect(() => {
+        post(about)
+    }, [])
     return (
-        <main ref={about}>
+        <about is="x3d" ref={ about }>
             <TopOfPage />
             <section className="mainWrap">
                 <div className="container">
@@ -12,7 +16,7 @@ const About = () => {
                         <div className="col-sm-12 sc_column_item">
                             <div className="col-sm-6 sc_column_item margin_bottom_mini margin_right_mini">
                                 <figure className="sc_image  sc_image_shape_square">
-                                    <img src="img/11.jpg" alt />
+                                    <img src="img/11.jpg" alt="true" />
                                 </figure>
                             </div>
                             <h1>Few words about Kindergarten</h1>
@@ -168,32 +172,32 @@ const About = () => {
                                                 <li>MySQL</li>
                                             </ul>
                                         </div>
-                                        <div id="sc_skills" className="sc_skills_arc_canvas"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width={432} height={432} style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}><desc style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}>Created with RaphaГ«l</desc><defs style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }} /><circle cx={216} cy={216} r={216} fill="#ffffff" stroke="none" style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }} /><text x={216} y={227} textAnchor="middle" font="lighter 34px &quot;Roboto Slab&quot;" stroke="none" fill="#888888" style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', textAnchor: 'middle', font: 'lighter 34px "Roboto Slab"', opacity: 1 }} opacity={1}><tspan style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' }}>Skills</tspan></text><path fill="none" stroke="none" d="M157.0089859857729,214.97030802020026A59,59,0,1,1,159.5780193981809,233.24993057864148" strokeWidth={10} style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10 }} /><path fill="none" stroke="none" d="M214.3943786077699,124.014012045612A92,92,0,1,1,160.63301787001154,142.52553307564907" strokeWidth={10} style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10 }} /><path fill="none" stroke="none" d="M97.81017805008541,256.6960193071446A125,125,0,1,1,218.18155080466042,340.9809618945489" strokeWidth={10} style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10 }} /><path fill="none" stroke="none" d="M146.73735880732573,73.99054068473163A158,158,0,1,1,257.4258902252566,368.47260612662524" strokeWidth={10} style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10 }} /><path fill="none" stroke="none" d="M186.12101717731588,27.351526946328704A191,191,0,0,1,302.71218545025346,386.18224611997823" strokeWidth={10} style={{ WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10, opacity: 1 }} opacity={1} /></svg>
+                                        <div id="sc_skills" className="sc_skills_arc_canvas"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width={ 432 } height={ 432 } style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' } }><desc style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' } }>Created with RaphaГ«l</desc><defs style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' } } /><circle cx={ 216 } cy={ 216 } r={ 216 } fill="#ffffff" stroke="none" style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' } } /><text x={ 216 } y={ 227 } textAnchor="middle" font="lighter 34px &quot;Roboto Slab&quot;" stroke="none" fill="#888888" style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', textAnchor: 'middle', font: 'lighter 34px "Roboto Slab"', opacity: 1 } } opacity={ 1 }><tspan style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)' } }>Skills</tspan></text><path fill="none" stroke="none" d="M157.0089859857729,214.97030802020026A59,59,0,1,1,159.5780193981809,233.24993057864148" strokeWidth={ 10 } style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10 } } /><path fill="none" stroke="none" d="M214.3943786077699,124.014012045612A92,92,0,1,1,160.63301787001154,142.52553307564907" strokeWidth={ 10 } style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10 } } /><path fill="none" stroke="none" d="M97.81017805008541,256.6960193071446A125,125,0,1,1,218.18155080466042,340.9809618945489" strokeWidth={ 10 } style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10 } } /><path fill="none" stroke="none" d="M146.73735880732573,73.99054068473163A158,158,0,1,1,257.4258902252566,368.47260612662524" strokeWidth={ 10 } style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10 } } /><path fill="none" stroke="none" d="M186.12101717731588,27.351526946328704A191,191,0,0,1,302.71218545025346,386.18224611997823" strokeWidth={ 10 } style={ { WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)', strokeWidth: 10, opacity: 1 } } opacity={ 1 } /></svg>
                                         </div>
                                         <div className="sc_skills_data">
                                             <div className="arc">
                                                 <input type="hidden" className="text" defaultValue="JavaScript" />
-                                                <input type="hidden" className="percent" defaultValue={95} />
+                                                <input type="hidden" className="percent" defaultValue={ 95 } />
                                                 <input type="hidden" className="color" />
                                             </div>
                                             <div className="arc">
                                                 <input type="hidden" className="text" defaultValue="CSS3" />
-                                                <input type="hidden" className="percent" defaultValue={90} />
+                                                <input type="hidden" className="percent" defaultValue={ 90 } />
                                                 <input type="hidden" className="color" />
                                             </div>
                                             <div className="arc">
                                                 <input type="hidden" className="text" defaultValue="HTML5" />
-                                                <input type="hidden" className="percent" defaultValue={80} />
+                                                <input type="hidden" className="percent" defaultValue={ 80 } />
                                                 <input type="hidden" className="color" />
                                             </div>
                                             <div className="arc">
                                                 <input type="hidden" className="text" defaultValue="PHP" />
-                                                <input type="hidden" className="percent" defaultValue={53} />
+                                                <input type="hidden" className="percent" defaultValue={ 53 } />
                                                 <input type="hidden" className="color" />
                                             </div>
                                             <div className="arc">
                                                 <input type="hidden" className="text" defaultValue="MySQL" />
-                                                <input type="hidden" className="percent" defaultValue={45} />
+                                                <input type="hidden" className="percent" defaultValue={ 45 } />
                                                 <input type="hidden" className="color" />
                                             </div>
                                         </div>
@@ -204,32 +208,32 @@ const About = () => {
                                     <div className="sc_skills sc_skills_bar sc_skills_horizontal" data-type="bar" data-subtitle="Skills" data-dir="horizontal">
                                         <div className="sc_skills_info">English</div>
                                         <div className="sc_skills_item sc_skills_style_1 inited">
-                                            <div className="sc_skills_count" style={{ width: '98%' }}>
-                                                <div className="sc_skills_total" data-start={0} data-stop={98} data-step={1} data-max={100} data-speed={39} data-duration={3822} data-ed="%">98%</div>
+                                            <div className="sc_skills_count" style={ { width: '98%' } }>
+                                                <div className="sc_skills_total" data-start={ 0 } data-stop={ 98 } data-step={ 1 } data-max={ 100 } data-speed={ 39 } data-duration={ 3822 } data-ed="%">98%</div>
                                             </div>
                                         </div>
                                         <div className="sc_skills_info">Spanish</div>
                                         <div className="sc_skills_item sc_skills_style_1 inited">
-                                            <div className="sc_skills_count" style={{ width: '66%' }}>
-                                                <div className="sc_skills_total" data-start={0} data-stop={66} data-step={1} data-max={100} data-speed={23} data-duration={1518} data-ed="%">66%</div>
+                                            <div className="sc_skills_count" style={ { width: '66%' } }>
+                                                <div className="sc_skills_total" data-start={ 0 } data-stop={ 66 } data-step={ 1 } data-max={ 100 } data-speed={ 23 } data-duration={ 1518 } data-ed="%">66%</div>
                                             </div>
                                         </div>
                                         <div className="sc_skills_info">French</div>
                                         <div className="sc_skills_item sc_skills_style_1 inited">
-                                            <div className="sc_skills_count" style={{ width: '87%' }}>
-                                                <div className="sc_skills_total" data-start={0} data-stop={87} data-step={1} data-max={100} data-speed={32} data-duration={2784} data-ed="%">87%</div>
+                                            <div className="sc_skills_count" style={ { width: '87%' } }>
+                                                <div className="sc_skills_total" data-start={ 0 } data-stop={ 87 } data-step={ 1 } data-max={ 100 } data-speed={ 32 } data-duration={ 2784 } data-ed="%">87%</div>
                                             </div>
                                         </div>
                                         <div className="sc_skills_info">Latin</div>
                                         <div className="sc_skills_item sc_skills_style_1 inited">
-                                            <div className="sc_skills_count" style={{ width: '82%' }}>
-                                                <div className="sc_skills_total" data-start={0} data-stop={82} data-step={1} data-max={100} data-speed={32} data-duration={2624} data-ed="%">82%</div>
+                                            <div className="sc_skills_count" style={ { width: '82%' } }>
+                                                <div className="sc_skills_total" data-start={ 0 } data-stop={ 82 } data-step={ 1 } data-max={ 100 } data-speed={ 32 } data-duration={ 2624 } data-ed="%">82%</div>
                                             </div>
                                         </div>
                                         <div className="sc_skills_info">Others</div>
                                         <div className="sc_skills_item sc_skills_style_1 inited">
-                                            <div className="sc_skills_count" style={{ width: '76%' }}>
-                                                <div className="sc_skills_total" data-start={0} data-stop={76} data-step={1} data-max={100} data-speed={11} data-duration={836} data-ed="%">76%</div>
+                                            <div className="sc_skills_count" style={ { width: '76%' } }>
+                                                <div className="sc_skills_total" data-start={ 0 } data-stop={ 76 } data-step={ 1 } data-max={ 100 } data-speed={ 11 } data-duration={ 836 } data-ed="%">76%</div>
                                             </div>
                                         </div>
                                     </div>
@@ -243,7 +247,7 @@ const About = () => {
                                         <div className="sc_skills_column col-md-2 col-md-offset-1 col-sm-12">
                                             <div className="sc_skills_item sc_skills_style_2 inited">
                                                 <div className="sc_skills_count">
-                                                    <div className="sc_skills_total" data-start={0} data-stop={68} data-step={1} data-max={100} data-speed={38} data-duration={2584} data-ed="%">68%</div>
+                                                    <div className="sc_skills_total" data-start={ 0 } data-stop={ 68 } data-step={ 1 } data-max={ 100 } data-speed={ 38 } data-duration={ 2584 } data-ed="%">68%</div>
                                                 </div>
                                                 <div className="sc_skills_info">Clean Design</div>
                                             </div>
@@ -251,7 +255,7 @@ const About = () => {
                                         <div className="sc_skills_column col-md-2 col-sm-6">
                                             <div className="sc_skills_item sc_skills_style_2 inited">
                                                 <div className="sc_skills_count">
-                                                    <div className="sc_skills_total" data-start={0} data-stop={72} data-step={1} data-max={100} data-speed={18} data-duration={1296} data-ed="%">72%</div>
+                                                    <div className="sc_skills_total" data-start={ 0 } data-stop={ 72 } data-step={ 1 } data-max={ 100 } data-speed={ 18 } data-duration={ 1296 } data-ed="%">72%</div>
                                                 </div>
                                                 <div className="sc_skills_info">Incredible Flexible</div>
                                             </div>
@@ -259,7 +263,7 @@ const About = () => {
                                         <div className="sc_skills_column col-md-2 col-sm-6">
                                             <div className="sc_skills_item sc_skills_style_2 inited">
                                                 <div className="sc_skills_count">
-                                                    <div className="sc_skills_total" data-start={0} data-stop={98} data-step={1} data-max={100} data-speed={28} data-duration={2744} data-ed="%">98%</div>
+                                                    <div className="sc_skills_total" data-start={ 0 } data-stop={ 98 } data-step={ 1 } data-max={ 100 } data-speed={ 28 } data-duration={ 2744 } data-ed="%">98%</div>
                                                 </div>
                                                 <div className="sc_skills_info">Responsive</div>
                                             </div>
@@ -267,7 +271,7 @@ const About = () => {
                                         <div className="sc_skills_column col-md-2 col-sm-6">
                                             <div className="sc_skills_item sc_skills_style_2 inited">
                                                 <div className="sc_skills_count">
-                                                    <div className="sc_skills_total" data-start={0} data-stop={45} data-step={1} data-max={100} data-speed={15} data-duration={675} data-ed="%">45%</div>
+                                                    <div className="sc_skills_total" data-start={ 0 } data-stop={ 45 } data-step={ 1 } data-max={ 100 } data-speed={ 15 } data-duration={ 675 } data-ed="%">45%</div>
                                                 </div>
                                                 <div className="sc_skills_info">SEO Ready</div>
                                             </div>
@@ -275,7 +279,7 @@ const About = () => {
                                         <div className="sc_skills_column col-md-2 col-sm-6">
                                             <div className="sc_skills_item sc_skills_style_2 inited">
                                                 <div className="sc_skills_count">
-                                                    <div className="sc_skills_total" data-start={0} data-stop={78} data-step={1} data-max={100} data-speed={27} data-duration={2106} data-ed="%">78%</div>
+                                                    <div className="sc_skills_total" data-start={ 0 } data-stop={ 78 } data-step={ 1 } data-max={ 100 } data-speed={ 27 } data-duration={ 2106 } data-ed="%">78%</div>
                                                 </div>
                                                 <div className="sc_skills_info">Free support</div>
                                             </div>
@@ -287,7 +291,7 @@ const About = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </about>
     )
 }
 

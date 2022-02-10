@@ -1,27 +1,16 @@
 import React, { useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Footer, Header, Slider, UserHeader } from "../components/site"
 import { getLocalSitedata, request } from '../helpers/utils'
-import { v4 as uuidv4 } from 'uuid'
 
-const Home = () => {
+const Home = ({ post }) => {
 
-    const ref = useRef(null)
-    useEffect(async () => {
-        const opt = { ref:ref, component: 'home' }
-        const data = getLocalSitedata(opt)
-        console.log('Data: ', data)
-        try
-        {
-            const resp = await request('post', data)
-            console.log('API-RESPONS: ', resp)
-        } catch (error)
-        {
-            console.warn(error)
-        }
+    const home = useRef(null)
+    useEffect(() => {
+        post(home)
     }, [])
     return (
-        <main ref={ ref }>
-            <Header />
+        <home is="x3d" ref={ home }>
             <Slider />
             <UserHeader />
             <section className="mainWrap with_sidebar sideBarRight">
@@ -2316,8 +2305,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            <Footer />
-        </main>
+        </home>
     )
 }
 

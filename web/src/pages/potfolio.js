@@ -1,10 +1,13 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { TopOfPage } from "../components/site"
 
-const Potfolio = () => {
+const Potfolio = ({post}) => {
     const potfolio = useRef(null)
+    useEffect(() => {
+        post(potfolio)
+    }, [])
     return (
-        <main ref={potfolio}>
+        <potfolio is="x3d" ref={potfolio}>
             <TopOfPage />
             <section className="portfolio_mansory_columns">
                 <div className="container">
@@ -418,7 +421,7 @@ const Potfolio = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </potfolio>
 
     )
 }

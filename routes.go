@@ -12,22 +12,22 @@ type Route struct {
 type Routes []Route
 
 var routes = Routes{
-	Route{
-		"getAll",
-		"GET",
-		"api/content",
-		getAll,
-	},
-	Route{
-		"create",
-		"POST",
-		"api/content",
-		create,
-	},
+	// Route{
+	// 	"getAll",
+	// 	"GET",
+	// 	"/content",
+	// 	getAll,
+	// },
+	// Route{
+	// 	"create",
+	// 	"POST",
+	// 	"/content",
+	// 	create,
+	// },
 	Route{
 		"handleUpload",
 		"POST",
-		"api/uploads/{fileName}",
+		"/uploads/{fileName}",
 		handleUpload,
 	},
 }

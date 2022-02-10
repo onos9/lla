@@ -1,10 +1,13 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { TopOfPage } from "../components/site"
 
-const Pricing = () => {
+const Pricing = ({post}) => {
     const pricing = useRef(null)
+    useEffect(() => {
+        post(pricing)
+    }, [])
     return (
-        <main ref={pricing}>
+        <pricing is="x3d" ref={pricing}>
             <TopOfPage />
             <section className="mainWrap with_sidebar sideBarLeft post">
                 <div className="container">
@@ -334,7 +337,7 @@ const Pricing = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </pricing>
     )
 }
 

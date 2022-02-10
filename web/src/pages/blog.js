@@ -1,10 +1,14 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
+import { Link } from "react-router-dom"
 import { TopOfPage } from "../components/site"
 
-const Blog = () => {
+const Blog = ({post}) => {
     const blog = useRef(null)
+    useEffect(() => {
+        post(blog)
+    }, [])
     return (
-        <main ref={blog}>
+        <blog is="x3d" ref={blog}>
             <TopOfPage />
             <section className="mainWrap without_sidebar">
                 <div className="container" role="main">
@@ -15,31 +19,31 @@ const Blog = () => {
                                     <article className="postLeft hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 24, 2014</a>
+                                            <Link to="#" className="post_date">February 24, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="sc_section  col-sm-6 sc_alignleft">
                                             <div className="sc_border sc_border_light inited">
                                                 <div className="sc_zoom inited">
-                                                    <img src="img/tablet_1.jpg" data-zoom-image="img/tablet_2.jpg" alt />
+                                                    <img src="img/tablet_1.jpg" data-zoom-image="img/tablet_2.jpg" alt="true"/>
                                                 </div>
                                             </div>
                                         </div>
                                         <h2 className="post_title">
-                                            <a href="features_shortcodes_zoom.html">Theme is easy to use with any type of displays</a>
+                                            <Link to="features_shortcodes_zoom.html">Theme is easy to use with any type of displays</Link>
                                         </h2>
                                         <div className="postImage">
                                             <p> </p>
                                             <div className="sc_title_image sc_title_left sc_size_medium">
-                                                <img src="img/lens_icon_retina.png" alt />
+                                                <img src="img/lens_icon_retina.png" alt="true"/>
                                             </div>
                                             <h3 className="sc_title sc_title_iconed">Retina Ready</h3>
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -47,21 +51,21 @@ const Blog = () => {
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="features_shortcodes_zoom.html">More</a>
+                                                    <Link className="fa-link" title="More" to="features_shortcodes_zoom.html">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 308" href="features_shortcodes_zoom.html">308</a>
+                                                    <Link className="fa-eye" title="Views - 308" to="features_shortcodes_zoom.html">308</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 1" href="features_shortcodes_zoom.html">1</a>
+                                                    <Link className="fa-comment" title="Comments - 1" to="features_shortcodes_zoom.html">1</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-star" title="Rating - 79.3" href="features_shortcodes_zoom.html">79.3</a>
+                                                    <Link className="fa-star" title="Rating - 79.3" to="features_shortcodes_zoom.html">79.3</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={109} data-likes={10} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 10" href="#">
+                                                    <Link className="fa-heart" title="Like - 10" to="#">
                                                         <span className="likePost">10</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -69,27 +73,27 @@ const Blog = () => {
                                     <article className="postRight hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 23, 2014</a>
+                                            <Link to="#" className="post_date">February 23, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="sc_section  sc_alignright col-sm-6 margin_bottom_small">
                                             <div className="sc_video_player" data-width="100%" data-height={295} data-last-width={440} style={{ height: 269 }}>
                                                 <div className="sc_video_player_title" />
                                                 <div className="sc_video_frame sc_video_play_button inited" data-video="<iframe class=&quot;video_frame&quot; src=&quot;https://youtube.com/embed/636Dp8eHWnM?autoplay=1&quot; allowFullScreen=&quot;allowFullScreen&quot;></iframe>" style={{ opacity: 1 }}>
-                                                    <img alt src="img/video/video_post-523x295.jpg" style={{ height: 248 }} />
+                                                    <img alt="true"src="img/video/video_post-523x295.jpg" style={{ height: 248 }} />
                                                 </div>
                                             </div>
                                         </div>
                                         <h2 className="post_title">
-                                            <a href="features_shortcodes_video.html">Video post example</a>
+                                            <Link to="features_shortcodes_video.html">Video post example</Link>
                                         </h2>
                                         <div className="postVideo">
                                             <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -98,18 +102,18 @@ const Blog = () => {
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="features_shortcodes_video.html">More</a>
+                                                    <Link className="fa-link" title="More" to="features_shortcodes_video.html">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 576" href="features_shortcodes_video.html">576</a>
+                                                    <Link className="fa-eye" title="Views - 576" to="features_shortcodes_video.html">576</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 0" href="features_shortcodes_video.html">0</a>
+                                                    <Link className="fa-comment" title="Comments - 0" to="features_shortcodes_video.html">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={556} data-likes={8} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 8" href="#">
+                                                    <Link className="fa-heart" title="Like - 8" to="#">
                                                         <span className="likePost">8</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -117,50 +121,50 @@ const Blog = () => {
                                     <article className="postLeft hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 22, 2014</a>
+                                            <Link to="#" className="post_date">February 22, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="sc_section sc_alignleft col-sm-6">
                                             <figure className="sc_image  sc_image_shape_square">
-                                                <img src="img/laura.jpg" alt />
+                                                <img src="img/laura.jpg" alt="true"/>
                                             </figure>
                                             <div className="audio_container with_info margin_top_small">
                                                 <span className="mejs-offscreen">Audio Player</span><div id="mep_0" className="mejs-container svg audio_controls mejs-audio" tabIndex={0} role="application" aria-label="Audio Player" style={{ width: '100%', height: 30 }}><div className="mejs-inner"><div className="mejs-mediaelement"><audio className="audio_controls" src="sounds/laura.mp3">
                                                     <source src="sounds/laura.mp3" type="audio/mpeg" />
                                                     Тег audio not supported.
-                                                </audio></div><div className="mejs-layers"><div className="mejs-poster mejs-layer" style={{ display: 'none', width: '100%', height: 30 }} /></div><div className="mejs-controls"><div className="mejs-button mejs-playpause-button mejs-play"><button type="button" aria-controls="mep_0" title="Play" aria-label="Play" /></div><div className="mejs-time mejs-currenttime-container" role="timer" aria-live="off"><span className="mejs-currenttime">00:00</span></div><div className="mejs-time-rail" style={{ width: 264 }}><span className="mejs-time-total mejs-time-slider" aria-label="Time Slider" aria-valuemin={0} aria-valuemax="NaN" aria-valuenow={0} aria-valuetext="00:00" role="slider" tabIndex={0} style={{ width: 254 }}><span className="mejs-time-buffering" style={{ display: 'none' }} /><span className="mejs-time-loaded" style={{ width: 254 }} /><span className="mejs-time-current" style={{ width: 0 }} /><span className="mejs-time-handle" style={{ left: '-5px' }} /><span className="mejs-time-float"><span className="mejs-time-float-current">00:00</span><span className="mejs-time-float-corner" /></span></span></div><div className="mejs-time mejs-duration-container"><span className="mejs-duration">04:37</span></div><div className="mejs-button mejs-volume-button mejs-mute"><button type="button" aria-controls="mep_0" title="Mute Toggle" aria-label="Mute Toggle" /></div><a href="javascript:void(0);" className="mejs-horizontal-volume-slider mejs-mute" aria-label="volumeSlider" aria-valuemin={0} aria-valuemax={100} aria-valuenow={80} aria-valuetext="80%" role="slider" tabIndex={0}><span className="mejs-offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span><div className="mejs-horizontal-volume-total" /><div className="mejs-horizontal-volume-current" style={{ width: 40 }} /><div className="mejs-horizontal-volume-handle" style={{ left: 27 }} /></a></div><div className="mejs-clear" /></div></div>
+                                                </audio></div><div className="mejs-layers"><div className="mejs-poster mejs-layer" style={{ display: 'none', width: '100%', height: 30 }} /></div><div className="mejs-controls"><div className="mejs-button mejs-playpause-button mejs-play"><button type="button" aria-controls="mep_0" title="Play" aria-label="Play" /></div><div className="mejs-time mejs-currenttime-container" role="timer" aria-live="off"><span className="mejs-currenttime">00:00</span></div><div className="mejs-time-rail" style={{ width: 264 }}><span className="mejs-time-total mejs-time-slider" aria-label="Time Slider" aria-valuemin={0} aria-valuemax="NaN" aria-valuenow={0} aria-valuetext="00:00" role="slider" tabIndex={0} style={{ width: 254 }}><span className="mejs-time-buffering" style={{ display: 'none' }} /><span className="mejs-time-loaded" style={{ width: 254 }} /><span className="mejs-time-current" style={{ width: 0 }} /><span className="mejs-time-handle" style={{ left: '-5px' }} /><span className="mejs-time-float"><span className="mejs-time-float-current">00:00</span><span className="mejs-time-float-corner" /></span></span></div><div className="mejs-time mejs-duration-container"><span className="mejs-duration">04:37</span></div><div className="mejs-button mejs-volume-button mejs-mute"><button type="button" aria-controls="mep_0" title="Mute Toggle" aria-label="Mute Toggle" /></div><Link to="javascript:void(0);" className="mejs-horizontal-volume-slider mejs-mute" aria-label="volumeSlider" aria-valuemin={0} aria-valuemax={100} aria-valuenow={80} aria-valuetext="80%" role="slider" tabIndex={0}><span className="mejs-offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span><div className="mejs-horizontal-volume-total" /><div className="mejs-horizontal-volume-current" style={{ width: 40 }} /><div className="mejs-horizontal-volume-handle" style={{ left: 27 }} /></Link></div><div className="mejs-clear" /></div></div>
                                             </div>
                                         </div>
                                         <h2 className="post_title">
-                                            <a href="features_shortcodes_audio.html">Audio post example with cover image</a>
+                                            <Link to="features_shortcodes_audio.html">Audio post example with cover image</Link>
                                         </h2>
                                         <div className="postAudio">
-                                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.<br />
+                                            <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took Link galley of type and scrambled it to make Link type specimen book. It has survived not only five centuries.<br />
                                                 There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.</p>
                                         </div>
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="features_shortcodes_audio.html">More</a>
+                                                    <Link className="fa-link" title="More" to="features_shortcodes_audio.html">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 766" href="features_shortcodes_audio.html">766</a>
+                                                    <Link className="fa-eye" title="Views - 766" to="features_shortcodes_audio.html">766</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 0" href="features_shortcodes_audio.html">0</a>
+                                                    <Link className="fa-comment" title="Comments - 0" to="features_shortcodes_audio.html">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={564} data-likes={6} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 6" href="#">
+                                                    <Link className="fa-heart" title="Like - 6" to="#">
                                                         <span className="likePost">6</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -168,41 +172,41 @@ const Blog = () => {
                                     <article className="postRight hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 21, 2014</a>
+                                            <Link to="#" className="post_date">February 21, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="sc_section  col-sm-6 sc_alignright margin_bottom_small">
                                             <div className="sc_border sc_border_dark inited">
                                                 <div id="swiper_container_2" className="sc_slider sc_slider_swiper sc_slider_controls sc_slider_pagination swiper-container2 swiper-container-horizontal" style={{ cursor: 'grab' }}>
                                                     <ul className="swiper-wrapper" style={{ transitionDuration: '0ms', transform: 'translate3d(-684px, 0px, 0px)' }}><li className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={2} style={{ width: 342 }}>
-                                                        <img src="img/slider/portfolio_item-520x390.jpg" alt />
+                                                        <img src="img/slider/portfolio_item-520x390.jpg" alt="true"/>
                                                     </li>
                                                         <li className="swiper-slide swiper-slide-prev" data-swiper-slide-index={0} style={{ width: 342 }}>
-                                                            <img src="img/slider/9435123826_a4c3b35c08_o-520x390.jpg" alt />
+                                                            <img src="img/slider/9435123826_a4c3b35c08_o-520x390.jpg" alt="true"/>
                                                         </li>
                                                         <li className="swiper-slide swiper-slide-active" data-swiper-slide-index={1} style={{ width: 342 }}>
-                                                            <img src="img/slider/masonry6-520x390.jpg" alt />
+                                                            <img src="img/slider/masonry6-520x390.jpg" alt="true"/>
                                                         </li>
                                                         <li className="swiper-slide swiper-slide-next" data-swiper-slide-index={2} style={{ width: 342 }}>
-                                                            <img src="img/slider/portfolio_item-520x390.jpg" alt />
+                                                            <img src="img/slider/portfolio_item-520x390.jpg" alt="true"/>
                                                         </li>
                                                         <li className="swiper-slide swiper-slide-duplicate" data-swiper-slide-index={0} style={{ width: 342 }}>
-                                                            <img src="img/slider/9435123826_a4c3b35c08_o-520x390.jpg" alt />
+                                                            <img src="img/slider/9435123826_a4c3b35c08_o-520x390.jpg" alt="true"/>
                                                         </li></ul>
                                                     <ul className="flex-direction-nav">
                                                         <li>
-                                                            <a className="swiper-button-prev" href="#" />
+                                                            <Link className="swiper-button-prev" to="#" />
                                                         </li>
                                                         <li>
-                                                            <a className="swiper-button-next" href="#" />
+                                                            <Link className="swiper-button-next" to="#" />
                                                         </li>
                                                     </ul>
                                                     <div className="flex-control-nav">
@@ -212,12 +216,12 @@ const Blog = () => {
                                             </div>
                                         </div>
                                         <h2 className="post_title">
-                                            <a href="features_shortcodes_slider.html">Theme is easily adaptable to any mobile device</a>
+                                            <Link to="features_shortcodes_slider.html">Theme is easily adaptable to any mobile device</Link>
                                         </h2>
                                         <div className="postGallery">
                                             <p> </p>
                                             <div className="sc_title_image sc_title_left sc_size_medium">
-                                                <img src="img/lens_icon_retina.png" alt />
+                                                <img src="img/lens_icon_retina.png" alt="true"/>
                                             </div>
                                             <h3 className="sc_title sc_title_iconed">Tablet friendly</h3>
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -225,18 +229,18 @@ const Blog = () => {
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="features_shortcodes_slider.html">More</a>
+                                                    <Link className="fa-link" title="More" to="features_shortcodes_slider.html">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 106" href="features_shortcodes_slider.html">106</a>
+                                                    <Link className="fa-eye" title="Views - 106" to="features_shortcodes_slider.html">106</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 0" href="features_shortcodes_slider.html">0</a>
+                                                    <Link className="fa-comment" title="Comments - 0" to="features_shortcodes_slider.html">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={569} data-likes={1} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 1" href="#">
+                                                    <Link className="fa-heart" title="Like - 1" to="#">
                                                         <span className="likePost">1</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -244,40 +248,40 @@ const Blog = () => {
                                     <article className="postDefault hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 20, 2014</a>
+                                            <Link to="#" className="post_date">February 20, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="postQuote">
                                             <blockquote cite="#" className="sc_quote">
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                                 <p className="sc_quote_title">
-                                                    <a href="#">Lisa Kudrow</a>
+                                                    <Link to="#">Lisa Kudrow</Link>
                                                 </p>
                                             </blockquote>
                                         </div>
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="#">More</a>
+                                                    <Link className="fa-link" title="More" to="#">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 9" href="#">9</a>
+                                                    <Link className="fa-eye" title="Views - 9" to="#">9</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 0" href="#">0</a>
+                                                    <Link className="fa-comment" title="Comments - 0" to="#">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={582} data-likes={0} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 0" href="#">
+                                                    <Link className="fa-heart" title="Like - 0" to="#">
                                                         <span className="likePost">0</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -285,37 +289,37 @@ const Blog = () => {
                                     <article className="postDefault hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 19, 2014</a>
+                                            <Link to="#" className="post_date">February 19, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="postLink">
                                             <p>
-                                                <a href="#">http://themeforest.net/user/ThemeREX/portfolio</a>
+                                                <Link to="#">http://themeforest.net/user/ThemeREX/portfolio</Link>
                                             </p>
                                         </div>
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="#">More</a>
+                                                    <Link className="fa-link" title="More" to="#">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 0" href="#">0</a>
+                                                    <Link className="fa-eye" title="Views - 0" to="#">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 0" href="#">0</a>
+                                                    <Link className="fa-comment" title="Comments - 0" to="#">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={584} data-likes={1} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 1" href="#">
+                                                    <Link className="fa-heart" title="Like - 1" to="#">
                                                         <span className="likePost">1</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -323,15 +327,15 @@ const Blog = () => {
                                     <article className="postDefault hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 18, 2014</a>
+                                            <Link to="#" className="post_date">February 18, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="postStatus">
@@ -340,18 +344,18 @@ const Blog = () => {
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="#">More</a>
+                                                    <Link className="fa-link" title="More" to="#">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 6" href="#">6</a>
+                                                    <Link className="fa-eye" title="Views - 6" to="#">6</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 0" href="#">0</a>
+                                                    <Link className="fa-comment" title="Comments - 0" to="#">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={586} data-likes={1} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 1" href="#">
+                                                    <Link className="fa-heart" title="Like - 1" to="#">
                                                         <span className="likePost">1</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -359,15 +363,15 @@ const Blog = () => {
                                     <article className="postDefault hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 17, 2014</a>
+                                            <Link to="#" className="post_date">February 17, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="postAside">
@@ -376,18 +380,18 @@ const Blog = () => {
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="#">More</a>
+                                                    <Link className="fa-link" title="More" to="#">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 5" href="#">5</a>
+                                                    <Link className="fa-eye" title="Views - 5" to="#">5</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 0" href="#">0</a>
+                                                    <Link className="fa-comment" title="Comments - 0" to="#">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={588} data-likes={0} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 0" href="#">
+                                                    <Link className="fa-heart" title="Like - 0" to="#">
                                                         <span className="likePost">0</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -395,46 +399,46 @@ const Blog = () => {
                                     <article className="postDefault hrShadow post">
                                         <div className="post_info infoPost">
                                             Posted
-                                            <a href="#" className="post_date">February 16, 2014</a>
+                                            <Link to="#" className="post_date">February 16, 2014</Link>
                                             <span className="separator">|</span>
                                             by
-                                            <a href="#" className="post_author">John Doe</a>
+                                            <Link to="#" className="post_author">John Doe</Link>
                                             <span className="separator">|</span>
                                             <span className="post_cats">
                                                 in
-                                                <a className="cat_link" href="#">Post Formats,</a>
-                                                <a className="cat_link" href="#">Post formats fullwidth</a>
+                                                <Link className="cat_link" to="#">Post Formats,</Link>
+                                                <Link className="cat_link" to="#">Post formats fullwidth</Link>
                                             </span>
                                         </div>
                                         <div className="postChat">
                                             <div className="sc_chat">
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                                 <p className="sc_quote_title">
-                                                    <a href="#">Mike</a>
+                                                    <Link to="#">Mike</Link>
                                                 </p>
                                             </div>
                                             <div className="sc_chat">
-                                                <p>Vivamus nec quam nec elit porta dictum. Praesent dignissim eget ligula vel posuere. Proin sed mauris faucibus, euismod erat a, placerat odio.</p>
+                                                <p>Vivamus nec quam nec elit porta dictum. Praesent dignissim eget ligula vel posuere. Proin sed mauris faucibus, euismod erat Link, placerat odio.</p>
                                                 <p className="sc_quote_title">
-                                                    <a href="#">Lisa</a>
+                                                    <Link to="#">Lisa</Link>
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="postSharing inited">
                                             <ul>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-link" title="More" href="#">More</a>
+                                                    <Link className="fa-link" title="More" to="#">More</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-eye" title="Views - 3" href="#">3</a>
+                                                    <Link className="fa-eye" title="Views - 3" to="#">3</Link>
                                                 </li>
                                                 <li className="squareButton light ico">
-                                                    <a className="fa-comment" title="Comments - 0" href="#">0</a>
+                                                    <Link className="fa-comment" title="Comments - 0" to="#">0</Link>
                                                 </li>
                                                 <li className="squareButton light ico likeButton like" data-postid={593} data-likes={1} data-title-like="Like" data-title-dislike="Dislike">
-                                                    <a className="fa-heart" title="Like - 1" href="#">
+                                                    <Link className="fa-heart" title="Like - 1" to="#">
                                                         <span className="likePost">1</span>
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -447,15 +451,15 @@ const Blog = () => {
                                                 <tr>
                                                     <th className="prevMonth">
                                                         <div className="left roundButton">
-                                                            <a href="#" data-type="post" data-year={2014} data-month={5} title="View posts for May 2014" />
+                                                            <Link to="#" data-type="post" data-year={2014} data-month={5} title="View posts for May 2014" />
                                                         </div>
                                                     </th>
                                                     <th className="curMonth" colSpan={5}>
-                                                        <a href="archives.html" title="View posts for July 2015">July <span>2015</span></a>
+                                                        <Link to="archives.html" title="View posts for July 2015">July <span>2015</span></Link>
                                                     </th>
                                                     <th className="nextMonth">
                                                         <div className="right roundButton">
-                                                            <a href="#" data-type="post" data-year={2014} data-month={5} title="View posts for May 2014" />
+                                                            <Link to="#" data-type="post" data-year={2014} data-month={5} title="View posts for May 2014" />
                                                         </div>
                                                     </th>
                                                 </tr>
@@ -520,74 +524,74 @@ const Blog = () => {
                                 <div className="tab-pane fade widgetTop widget widget_archive" id="archives">
                                     <ul>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 May
                                                 <span>2014</span>
-                                                <span /></a>&nbsp;(7)
+                                                <span /></Link>&nbsp;(7)
                                         </li>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 April
                                                 <span>2014</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(2)
                                         </li>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 March
                                                 <span>2014</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(37)
                                         </li>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 February
                                                 <span>2014</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(58)
                                         </li>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 January
                                                 <span>2014</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(10)
                                         </li>
                                     </ul>
                                     <ul>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 December
                                                 <span>2013</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(4)
                                         </li>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 November
                                                 <span>2013</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(3)
                                         </li>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 October
                                                 <span>2013</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(3)
                                         </li>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 September
                                                 <span>2013</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(6)
                                         </li>
                                         <li>
-                                            <a href="archives.html">
+                                            <Link to="archives.html">
                                                 August
                                                 <span>2013</span>
-                                                <span /></a>
+                                                <span /></Link>
                                             &nbsp;(2)
                                         </li>
                                     </ul>
@@ -595,44 +599,44 @@ const Blog = () => {
                                 <div className="tab-pane fade widgetTop widget widget_flickr" id="flickr-widget">
                                     <div className="flickr_images">
                                         <div className="flickr_badge_image">
-                                            <a href="http://www.flickr.com">
+                                            <Link to="http://www.flickr.com">
                                                 <img src="img/flickr/10323784405_44d211ce56_m.jpg" alt="A photo on Flickr" title="Doing &quot;Responsive&quot; on Envato.com" />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="flickr_badge_image">
-                                            <a href="http://www.flickr.com">
+                                            <Link to="http://www.flickr.com">
                                                 <img src="img/flickr/4971973996_4bff1a4df5_m.jpg" alt="A photo on Flickr" title="The Envato Remote Team" />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="flickr_badge_image">
-                                            <a href="http://www.flickr.com">
+                                            <Link to="http://www.flickr.com">
                                                 <img src="img/flickr/15485436268_846ccca178_m.jpg" alt="A photo on Flickr" title="Halloween 2014 at Envato in Melbourne" />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="flickr_badge_image">
-                                            <a href="http://www.flickr.com">
+                                            <Link to="http://www.flickr.com">
                                                 <img src="img/flickr/13090549273_ee5c732ce1_m.jpg" alt="A photo on Flickr" title="Around the Envato Office - Highfive!" />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="flickr_badge_image">
-                                            <a href="http://www.flickr.com">
+                                            <Link to="http://www.flickr.com">
                                                 <img src="img/flickr/7694603486_1c63eb5824_m.jpg" alt="A photo on Flickr" title="New York Meetup 2012" />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="flickr_badge_image">
-                                            <a href="http://www.flickr.com">
+                                            <Link to="http://www.flickr.com">
                                                 <img src="img/flickr/8953389069_9dd71d2d32_m.jpg" alt="A photo on Flickr" title="The garden!" />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="flickr_badge_image">
-                                            <a href="http://www.flickr.com">
+                                            <Link to="http://www.flickr.com">
                                                 <img src="img/flickr/11299036283_2574e60edc_m.jpg" alt="A photo on Flickr" title="Envato Adventures" />
-                                            </a>
+                                            </Link>
                                         </div>
                                         <div className="flickr_badge_image">
-                                            <a href="http://www.flickr.com">
+                                            <Link to="http://www.flickr.com">
                                                 <img src="img/flickr/5908024086_0550dfbfab_m.jpg" alt="A photo on Flickr" title="South View from Office (Night)" />
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -643,19 +647,19 @@ const Blog = () => {
                                                 <img alt="Morbi eget rutrum" src="img/51-75x75.jpg" />
                                             </div>
                                             <h5 className="post_title">
-                                                <a href="images_style_3.html">Morbi eget rutrum</a>
+                                                <Link to="images_style_3.html">Morbi eget rutrum</Link>
                                             </h5>
                                             <div className="post_info">
                                                 <span className="post_date">May 7, 2014</span>
                                                 <span className="post_author">
                                                     by
-                                                    <a href="#">John Doe</a>
+                                                    <Link to="#">John Doe</Link>
                                                 </span>
                                                 <span className="post_comments">
-                                                    <a href="images_style_3.html">
+                                                    <Link to="images_style_3.html">
                                                         <span className="comments_icon fa-eye" />
                                                         <span className="post_comments_number">126</span>
-                                                    </a>
+                                                    </Link>
                                                 </span>
                                             </div>
                                         </article>
@@ -664,19 +668,19 @@ const Blog = () => {
                                                 <img alt="Duis tempus ac risus id fringilla" src="img/1-75x75.jpg" />
                                             </div>
                                             <h5 className="post_title">
-                                                <a href="images_style_1.html">Duis tempus ac risus id fringilla</a>
+                                                <Link to="images_style_1.html">Duis tempus ac risus id fringilla</Link>
                                             </h5>
                                             <div className="post_info">
                                                 <span className="post_date">May 6, 2014</span>
                                                 <span className="post_author">
                                                     by
-                                                    <a href="#">John Doe</a>
+                                                    <Link to="#">John Doe</Link>
                                                 </span>
                                                 <span className="post_comments">
-                                                    <a href="images_style_1.html">
+                                                    <Link to="images_style_1.html">
                                                         <span className="comments_icon fa-eye" />
                                                         <span className="post_comments_number">64</span>
-                                                    </a>
+                                                    </Link>
                                                 </span>
                                             </div>
                                         </article>
@@ -687,19 +691,19 @@ const Blog = () => {
                                                 <img alt="Aenean at quam pharetra, aliquet odio at" src="img/2-75x75.jpg" />
                                             </div>
                                             <h5 className="post_title">
-                                                <a href="images_style_2.html">Aenean at quam pharetra, aliquet odio at</a>
+                                                <Link to="images_style_2.html">Aenean at quam pharetra, aliquet odio at</Link>
                                             </h5>
                                             <div className="post_info">
                                                 <span className="post_date">May 5, 2014</span>
                                                 <span className="post_author">
                                                     by
-                                                    <a href="#">John Doe</a>
+                                                    <Link to="#">John Doe</Link>
                                                 </span>
                                                 <span className="post_comments">
-                                                    <a href="images_style_2.html">
+                                                    <Link to="images_style_2.html">
                                                         <span className="comments_icon fa-eye" />
                                                         <span className="post_comments_number">25</span>
-                                                    </a>
+                                                    </Link>
                                                 </span>
                                             </div>
                                         </article>
@@ -708,19 +712,19 @@ const Blog = () => {
                                                 <img alt="Cras pulvinar sodales placerat" src="img/3-75x75.jpg" />
                                             </div>
                                             <h5 className="post_title">
-                                                <a href="images_style_3.html">Cras pulvinar sodales placerat</a>
+                                                <Link to="images_style_3.html">Cras pulvinar sodales placerat</Link>
                                             </h5>
                                             <div className="post_info">
                                                 <span className="post_date">May 4, 2014</span>
                                                 <span className="post_author">
                                                     by
-                                                    <a href="#">John Doe</a>
+                                                    <Link to="#">John Doe</Link>
                                                 </span>
                                                 <span className="post_comments">
-                                                    <a href="images_style_3.html">
+                                                    <Link to="images_style_3.html">
                                                         <span className="comments_icon fa-eye" />
                                                         <span className="post_comments_number">40</span>
-                                                    </a>
+                                                    </Link>
                                                 </span>
                                             </div>
                                         </article>
@@ -729,24 +733,24 @@ const Blog = () => {
                                 <div className="tab-pane fade widgetTop widget widget_meta" id="meta">
                                     <ul>
                                         <li>
-                                            <a href="#">Log in</a>
+                                            <Link to="#">Log in</Link>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <Link to="#">
                                                 Entries
                                                 <abbr title="Really Simple Syndication">RSS</abbr>
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                     <ul>
                                         <li>
-                                            <a href="#">
+                                            <Link to="#">
                                                 Comments
                                                 <abbr title="Really Simple Syndication">RSS</abbr>
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a>
+                                            <Link to="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -755,7 +759,7 @@ const Blog = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </blog>
     )
 }
 

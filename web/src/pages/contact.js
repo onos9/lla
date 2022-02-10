@@ -1,10 +1,13 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { TopOfPage } from "../components/site"
 
-const Contact = () => {
+const Contact = ({post}) => {
     const contact = useRef(null)
+    useEffect(() => {
+        post(contact)
+    }, [])
     return (
-        <main ref={contact}>
+        <contact  is="x3d" ref={contact}>
             <TopOfPage />
             <section className="mainWrap">
                 <div className="container">
@@ -68,7 +71,7 @@ const Contact = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </contact>
 
     )
 }

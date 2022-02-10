@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Container } from '@mui/material'
 import { AuthContext } from "../context"
 import { Verification } from "../components/user"
@@ -13,12 +13,25 @@ import {
 } from "../components/cms"
 import Top from "../components/cms/top"
 import CropperDialog from "../components/cms/dialog"
+import { request } from "../helpers/utils"
 
 
 const CMS = () => {
+
   const cms = useRef(null)
+  const [remoteData,setRemoteData] = useState(null)
+
+  useEffect(async () => {
+    let resp = await request('GET')
+    Object.keys(resp).map(function (key, index) {
+      
+    });
+    setRemoteData(resp)
+    if (resp) console.log('RESPONS: ', resp)
+  }, [])
+
   return (
-    <main ref={cms}>
+    <main ref={ cms }>
       <Top />
       <Container maxWidth="lg" sx={ { textAlign: 'center', mt: '3rem' } }>
         <AuthContext>
@@ -29,7 +42,7 @@ const CMS = () => {
           <Nav />
           <Upload />
           <div id="tabBlog">
-            <CropperDialog />
+            <CropperDialog remoteData={ remoteData} />
           </div>
           <div id="calender">
 

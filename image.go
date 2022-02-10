@@ -1,10 +1,9 @@
 package main
 
-type SiteData struct {
-	ID        string  `json:"_id"`
-	Component string  `json:"component"`
-	Images    []Image `json:"images"`
-	Typographies []Typography `json:"typographies"`
+type Content struct {
+	ID     string  `json:"_id"`
+	Route  string  `json:"route"`
+	Images []Image `json:"images"`
 }
 
 type Image struct {
@@ -17,4 +16,9 @@ type Typography struct {
 	Key  string `json:"key"`
 }
 
-type SiteContent []SiteData
+type Response struct {
+	Success bool `json:"success"`
+	Data    Data `json:"data"`
+}
+
+type Data map[string]Content

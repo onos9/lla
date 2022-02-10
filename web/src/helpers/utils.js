@@ -1,23 +1,30 @@
-import { typography } from "@mui/system"
 import { v4 as uuidv4 } from "uuid"
 
-export const request = async (method, body) => {
-    const options = {
+export const request = async (method, body = null) => {
+    const opt = {
         method: method,
-        headers: {
+        mode: 'cors',
+        header: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(body)
+        body: body ? JSON.stringify(body) : null
     }
-    const respons = await fetch('http://localhost:8080/api/content', options)
-    respons = await respons.json()
-    console.log("RESPONS: ", respons)
 
-    return respons
+    try
+    {
+        let resp = await fetch('http://localhost:8080/api/content', opt)
+        resp = await resp.json()
+        return resp
+
+    } catch (error)
+    {
+        return error.toString()
+    }
 }
 
-export const getLocalSitedata = ({ ref, component }) => {
+export const getLocalSitedata = (ref) => {
+    console.log(ref)
     const images = ref.current.getElementsByTagName("img")
     let urls = Array.from(images).map((img) => img.src)
 
@@ -37,7 +44,7 @@ export const getLocalSitedata = ({ ref, component }) => {
 
     return {
         _id: uuidv4(),
-        component: component,
+        route: ref.current.localName,
         images: imgs,
         typographies: {}
     }

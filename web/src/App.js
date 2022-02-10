@@ -1,5 +1,5 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import React, { useEffect, useRef, useState } from 'react'
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import { Footer, Header } from "./components/site"
 import './App.css'
 
@@ -17,25 +17,36 @@ import {
   ProductCategory,
   UnderConstruction,
 } from "./pages"
+import { getLocalSitedata, request } from './helpers/utils'
 
 function App() {
+  //const [remoteData, setRemoteData] = useState(null)
+
+  const handlePost = async (ref) => {
+    const data = getLocalSitedata(ref)
+    let resp = await request('GET')
+    if (!resp?.success) resp = await request('POST', data)
+    //setRemoteData(resp)
+    console.log('RESPONSE: ', resp)
+  }
+
   return (
     <main>
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/404" element={ <NotFound /> } />
-          <Route path="/about" element={ <About /> } />
-          <Route path="/blog" element={ <Blog /> } />
+          <Route path="/404" element={ <NotFound post={ handlePost } /> } />
+          <Route path="/about" element={ <About post={ handlePost } /> } />
+          <Route path="/blog" element={ <Blog post={ handlePost } /> } />
           <Route path="/admin" element={ <CMS /> } />
-          <Route path="/contact" element={ <Contact /> } />
-          <Route path="/faq" element={ <FAQ /> } />
-          <Route exact path="/" element={ <Home /> } />
-          <Route path="/potfolio" element={ <Potfolio /> } />
-          <Route path="/pricing" element={ <Pricing /> } />
-          <Route path="/productCategory" element={ <ProductCategory /> } />
-          <Route path="/product" element={ <Product /> } />
-          <Route path="/underConstruction" element={ <UnderConstruction /> } />
+          <Route path="/contact" element={ <Contact post={ handlePost } /> } />
+          <Route path="/faq" element={ <FAQ /> } post={ handlePost } />
+          <Route exact path="/" element={ <Home post={ handlePost } /> } />
+          <Route path="/potfolio" element={ <Potfolio post={ handlePost } /> } />
+          <Route path="/pricing" element={ <Pricing post={ handlePost } /> } />
+          <Route path="/productCategory" element={ <ProductCategory post={ handlePost } /> } />
+          <Route path="/product" element={ <Product post={ handlePost } /> } />
+          <Route path="/underConstruction" element={ <UnderConstruction post={ handlePost } /> } />
         </Routes>
         <Footer />
       </BrowserRouter>

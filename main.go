@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/gorilla/mux"
 	"github.com/lla/logs"
 )
 
@@ -36,11 +37,26 @@ func parseCmdLineArgs() {
 
 func main() {
 
-	router := NewRouter()
+	router := mux.NewRouter()
 
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	parseCmdLineArgs()
 	logs.Debugf("The root path is %s", rootPath)
+
+	api := router.PathPrefix("/api/").Subrouter()
+
+	api.HandleFunc("/content", create).Methods("POST")
+	api.HandleFunc("/content", getAll).Methods("GET")
+
+	// Serve static files
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./build/static/"))))
+
+	// Serve index page on all unhandled routes
+	router.PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./static/index.html")
+	})
+
+	router.Use(mux.CORSMethodMiddleware(router))
 
 	if port == 0 {
 		port = DefaultPort

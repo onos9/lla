@@ -1,10 +1,13 @@
-import React, { useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { TopOfPage } from "../components/site"
 
-const FAQ = () => {
+const FAQ = ({ post }) => {
     const faq = useRef(null)
+    useEffect(() => {
+        post(faq)
+    }, [])
     return (
-        <main ref={faq}>
+        <faq is="x3d" ref={ faq }>
             <TopOfPage />
             <section className="mainWrap with_sidebar sideBarRight">
                 <div className="container" role="main">
@@ -79,7 +82,7 @@ const FAQ = () => {
                                         </div>
                                         <div className="message">
                                             <label className="required" htmlFor="sc_contact_form_message">Your Message</label>
-                                            <textarea id="sc_contact_form_message" className="textAreaSize inited" name="message" style={{ overflow: 'hidden', overflowWrap: 'break-word', resize: 'none', height: 74 }} defaultValue={""} />
+                                            <textarea id="sc_contact_form_message" className="textAreaSize inited" name="message" style={ { overflow: 'hidden', overflowWrap: 'break-word', resize: 'none', height: 74 } } defaultValue={ "" } />
                                         </div>
                                         <div className="sc_contact_form_button">
                                             <div className="squareButton ico">
@@ -119,13 +122,13 @@ const FAQ = () => {
                                 </ul>
                                 <div className="sc_line sc_line_style_shadow margin_top_small" />
                                 <h3 className="sc_title sc_title_regular margin_bottom_small">Video tutorials</h3>
-                                <div className="sc_video_player margin_bottom_small" data-width="100%" data-height={197} data-last-width={360} style={{ height: 224 }}>
+                                <div className="sc_video_player margin_bottom_small" data-width="100%" data-height={ 197 } data-last-width={ 360 } style={ { height: 224 } }>
                                     <div className="sc_video_player_title" />
-                                    <div className="sc_video_frame sc_video_play_button inited" data-video="<iframe class=&quot;video_frame&quot; src=&quot;http://www.youtube.com/embed/636Dp8eHWnM?autoplay=1&quot; allowFullScreen=&quot;allowFullScreen&quot;></iframe>" style={{ opacity: 1 }}>
-                                        <img alt src="img/video/video_post-349x197.jpg" style={{ height: 203 }} />
+                                    <div className="sc_video_frame sc_video_play_button inited" data-video="<iframe class=&quot;video_frame&quot; src=&quot;http://www.youtube.com/embed/636Dp8eHWnM?autoplay=1&quot; allowFullScreen=&quot;allowFullScreen&quot;></iframe>" style={ { opacity: 1 } }>
+                                        <img alt src="img/video/video_post-349x197.jpg" style={ { height: 203 } } />
                                     </div>
                                 </div>
-                                <figure className="sc_image  sc_image_align_left sc_image_shape_square" style={{ marginRight: '10px !important', width: 76, height: 76 }}>
+                                <figure className="sc_image  sc_image_align_left sc_image_shape_square" style={ { marginRight: '10px !important', width: 76, height: 76 } }>
                                     <img src="img/acrobat-76x76.png" alt />
                                 </figure>
                                 <a href="#">Download our brochure</a>
@@ -134,7 +137,7 @@ const FAQ = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </faq>
     )
 }
 

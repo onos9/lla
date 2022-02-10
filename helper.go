@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+)
 
 // Progress is used to track the progress of a file upload.
 // It implements the io.Writer interface so it can be passed
@@ -29,4 +33,11 @@ func (pr *Progress) Print() {
 	}
 
 	fmt.Printf("File upload in progress: %d\n", pr.BytesRead)
+}
+
+//dont do this, see above edit
+func prettyprint(b []byte) ([]byte, error) {
+	var out bytes.Buffer
+	err := json.Indent(&out, b, "", "  ")
+	return out.Bytes(), err
 }

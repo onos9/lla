@@ -186,6 +186,7 @@ jQuery(document).ready(function() {
 });
 
 
+
 // riyalSlider init
 function royalSlider_init() {
     if (jQuery(".royalSlider").length > 0) {

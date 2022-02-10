@@ -54,11 +54,11 @@ BootstrapDialogTitle.propTypes = {
     onClose: PropTypes.func.isRequired,
 }
 
-const CropperDialog = () => {
-    const { documents } = useFirestore('gallery')
+const CropperDialog = ({ remoteData}) => {
+    //const { documents } = useFirestore('gallery')
     const [open, setOpen] = useState(false)
     const [selected, setSelected] = useState(null)
-    const [images, setImages] = useState(documents)
+    const [images, setImages] = useState(remoteData)
 
     const onCancel = () => {
         setSelected(null)
