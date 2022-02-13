@@ -130,6 +130,6 @@ export const generateDownload = async (imageSrc, crop) => {
   )
 }
 
-export function blobToFile(theBlob, fileName) {
-  return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: theBlob.file.type })
+export function blobToFile(blob, fileName) {
+  return new File([blob], fileName, { lastModified: new Date().getTime(), type: blob.file.type })
 }

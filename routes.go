@@ -24,10 +24,10 @@ var routes = Routes{
 	// 	"/content",
 	// 	create,
 	// },
-	Route{
-		"handleUpload",
-		"POST",
-		"/uploads/{fileName}",
-		handleUpload,
-	},
+	// Route{
+	// 	"handleUpload",
+	// 	"POST",
+	// 	"/uploads/{fileName}",
+	// 	handleUpload,
+	// },
 }

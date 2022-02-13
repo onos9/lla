@@ -1,14 +1,17 @@
 package main
 
 type Content struct {
-	ID     string  `json:"_id"`
-	Route  string  `json:"route"`
-	Images []Image `json:"images"`
+	ID        string  `json:"_id"`
+	Name     string  `json:"name"`
+	Images    []Image `json:"images"`
+	
 }
 
 type Image struct {
+	ID       string `json:"id"`
 	Path     string `json:"path"`
 	FileName string `json:"filename"`
+	Timestamp string  `json:"timestamp"`
 }
 
 type Typography struct {

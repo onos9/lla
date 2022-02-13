@@ -1,13 +1,16 @@
 import { Button, Slider } from "@mui/material"
-import React, { memo, useRef, useState } from "react"
+import React, { memo, useEffect, useRef, useState } from "react"
 import Cropper from "react-easy-crop"
-import { blobToFile, dataURLtoFile, getCroppedImg } from "../../helpers/cropImage"
+import { blobToFile, getCroppedImg } from "../../helpers/cropImage"
+import { request } from "../../helpers/utils"
 
 const ImageCropDialog = memo(({
   id,
   imageUrl,
+  aspectInit,
   setCroppedImageFor,
   resetImage,
+  onAspect
 }) => {
 
   const fileName = imageUrl.split('/').pop()
@@ -15,9 +18,26 @@ const ImageCropDialog = memo(({
   const [zoom, setZoom] = useState(1)
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+  const [aspect, setAspect] = useState(aspectInit)
 
   const inputRef = useRef()
-  const triggerFileSelectPopup = () => inputRef.current.click()
+
+  useEffect(() => {
+    console.log(`${window.location.origin}${imageUrl}`)
+    const img = document.querySelector(`img[src='${imageUrl}']`)
+    console.log('ASPECT-123: ', aspect)
+    if (img?.naturalHeight)
+    {
+      //console.log('ASPECT-123: ', aspect)
+      const aspectInit = img.naturalWidth / img.naturalHeight
+      setAspect(aspectInit)
+      //console.log('ASPECT-098: ', aspectInit)
+    }
+  })
+
+  const triggerFileSelectPopup = () => {
+    inputRef.current.click()
+  }
 
   const onCropChange = (crop) => {
     setCrop(crop)
@@ -31,41 +51,32 @@ const ImageCropDialog = memo(({
     setCroppedAreaPixels(croppedAreaPixels)
   }
 
-  const onCrop = async () => {
-    const croppedImageUrl = await getCroppedImg(image, croppedAreaPixels)
-    setCroppedImageFor(id, crop, zoom, 1, croppedImageUrl)
-  }
+  // const onCrop = async () => {
+  //   const croppedImageUrl = await getCroppedImg(image, croppedAreaPixels)
+  //   setCroppedImageFor(id, crop, zoom, 1, croppedImageUrl)
+  // }
 
-  const onResetImage = () => {
+  const onResetImage = (id) => {
     resetImage(id)
   }
 
   const onUpload = async () => {
     if (!image) return
 
-    try
-    {
-      const blob = await getCroppedImg(image, croppedAreaPixels)
-      setCroppedImageFor(id, crop, zoom, 1, blob)
-      console.log("BLOB: ", blob)
-      const file = blobToFile(blob, fileName)
-      console.log("FILE: ", file)
+    const blob = await getCroppedImg(image, croppedAreaPixels)
+    setCroppedImageFor(id, crop, zoom, 1, blob)
+    const file = blobToFile(blob, fileName)
+    console.log("BLOB: ", blob)
 
-      //   const formdata = new FormData()
-      //   formdata.append("croppedImage", convertedUrlToFile)
+    const formdata = new FormData()
+    formdata.append("croppedImage", file)
 
-      //   let resp = await fetch("http://localhost:9000/api/users/setProfilePic", {
-      //     method: "POST",
-      //     body: formdata,
-      //   })
 
-      //   resp = await res.json()
-      //   console.log(resp)
+    let resp = await request("/upload", 'POST', {
+      body: formdata, type: 'multipart/form-data'
+    })
 
-    } catch (err)
-    {
-      console.warn("UPLOAD-ERROR: ", err.message)
-    }
+    console.log('RESPONS', resp)
   }
 
   const onSelectFile = (event) => {
@@ -74,6 +85,7 @@ const ImageCropDialog = memo(({
       const reader = new FileReader()
       reader.readAsDataURL(event.target.files[0])
       reader.addEventListener("load", () => {
+        console.log("ASPECT: ", aspect)
         setImage(reader.result)
       })
     }
@@ -91,7 +103,7 @@ const ImageCropDialog = memo(({
         />
 
         <Button
-          onClick={ () => onResetImage() }
+          onClick={ () => onResetImage(id) }
           variant='contained'
           color='primary'
           style={ { marginRight: "10px" } }
@@ -115,10 +127,11 @@ const ImageCropDialog = memo(({
           <>
             <div className='cropper'>
               <Cropper
+                id={ id }
                 image={ image }
                 crop={ crop }
                 zoom={ zoom }
-                aspect={ 1.4 }
+                aspect={ aspect }
                 onCropChange={ onCropChange }
                 onZoomChange={ onZoomChange }
                 onCropComplete={ onCropComplete }

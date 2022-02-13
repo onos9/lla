@@ -1,19 +1,22 @@
+import moment from "moment"
 import { v4 as uuidv4 } from "uuid"
 
-export const request = async (method, body = null) => {
+export const request = async (route, method = 'GET', params = {}) => {
+    console.log(method + ': ', {route:route, type:params?.type})
     const opt = {
         method: method,
         mode: 'cors',
         header: {
+            'Accept': 'multipart/form-data',
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': params?.type ? params?.type : 'application/json'
         },
-        body: body ? JSON.stringify(body) : null
+        body: JSON.stringify(params?.body)
     }
 
     try
     {
-        let resp = await fetch('http://localhost:8080/api/content', opt)
+        let resp = await fetch('http://localhost:8080/api' + route, opt)
         resp = await resp.json()
         return resp
 
@@ -24,7 +27,6 @@ export const request = async (method, body = null) => {
 }
 
 export const getLocalSitedata = (ref) => {
-    console.log(ref)
     const images = ref.current.getElementsByTagName("img")
     let urls = Array.from(images).map((img) => img.src)
 
@@ -37,16 +39,46 @@ export const getLocalSitedata = (ref) => {
     // construct site image structure
     let imgs = urls.map((url) => {
         return {
+            id: uuidv4(),
             path: (new URL(url)).pathname,
-            filename: url.split('/').pop()
+            filename: url.split('/').pop(),
+            timestamp: moment()
         }
     })
 
     return {
         _id: uuidv4(),
-        route: ref.current.localName,
+        name: ref.current.localName,
         images: imgs,
-        typographies: {}
+        typography: [],
+        videos: [],
+        audios: [],
+        animations: [],
+        docs: [],
+        others: []
     }
 }
+
+// function getTextNodesIn(node, includeWhitespaceNodes) {
+//     var textNodes = [], whitespace = /^\s*$/
+
+//     function getTextNodes(node) {
+//         if (node.nodeType == 3)
+//         {
+//             if (includeWhitespaceNodes || !whitespace.test(node.nodeValue))
+//             {
+//                 textNodes.push(node)
+//             }
+//         } else
+//         {
+//             for (var i = 0, len = node.childNodes.length; i < len; ++i)
+//             {
+//                 getTextNodes(node.childNodes[i])
+//             }
+//         }
+//     }
+
+//     getTextNodes(node)
+//     return textNodes
+// }
 

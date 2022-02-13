@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ImageList from '@mui/material/ImageList'
 import ImageListItem from '@mui/material/ImageListItem'
-import { Avatar, Tooltip, Typography } from '@mui/material'
-import moment from 'moment'
+
 import Options from './options'
-import useFirestore from '../../firebase/useFirestore'
-import { useAuth } from '../../context/autoContext'
-import ImageCropDialog from "./imageCropDialog"
+import { Typography } from '@mui/material'
 
 function srcset(image, size, rows = 1, cols = 1) {
   return {
@@ -16,15 +13,14 @@ function srcset(image, size, rows = 1, cols = 1) {
   }
 }
 
-export default function ImagesList({ images, onOpen }) {
-  const { currentUser } = useAuth()
+export default function ImagesList({ images, name, onOpen }) {
   return (
     <>
       <ImageList variant="quilted" cols={ 4 } rowHeight={ 200 } >
-        { images.map((item, index) => (
+        { images.map((img, index) => (
           <ImageListItem
-            onClick={ () => onOpen(item?.data) }
-            key={ item?.id }
+            onClick={ () => onOpen(img, name) }
+            key={ index }
             cols={
               pattern[
                 index - Math.floor(index / pattern.length) * pattern.length
@@ -42,12 +38,10 @@ export default function ImagesList({ images, onOpen }) {
               '&:hover': { opacity: 1 },
             } }
           >
-            { currentUser?.uid === item?.data?.uid && (
-              <Options imageId={ item?.id } />
-            ) }
+            <Options imageId={ img?.id } />
             <img
               { ...srcset(
-                item?.data?.imageURL,
+                img?.path,
                 200,
                 pattern[
                   index - Math.floor(index / pattern.length) * pattern.length
@@ -56,7 +50,7 @@ export default function ImagesList({ images, onOpen }) {
                   index - Math.floor(index / pattern.length) * pattern.length
                 ].cols
               ) }
-              alt={ item?.data?.uName || item?.data?.uEmail?.split('@')[0] }
+              alt={ img?.filename }
               loading="lazy"
             />
             <Typography
@@ -72,10 +66,10 @@ export default function ImagesList({ images, onOpen }) {
                 borderTopRightRadius: 8,
               } }
             >
-              { moment(item?.data?.timestamp?.toDate()).fromNow() }
+              {/* { moment().format(img?.timestamp).fromNow() } */}
             </Typography>
-            <Tooltip
-              title={ item?.data?.uName || item?.data?.uEmail?.split('@')[0] }
+            {/* <Tooltip
+              title={ img?.filename }
               sx={ {
                 position: 'absolute',
                 bottom: '3px',
@@ -86,7 +80,7 @@ export default function ImagesList({ images, onOpen }) {
                 src={ item?.data?.uPhoto }
                 imgProps={ { 'aria-hidden': true } }
               />
-            </Tooltip>
+            </Tooltip> */}
           </ImageListItem>
         ))
         }

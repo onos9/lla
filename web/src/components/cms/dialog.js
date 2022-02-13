@@ -1,78 +1,51 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
 import Button from '@mui/material/Button'
-import { styled } from '@mui/material/styles'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
-import IconButton from '@mui/material/IconButton'
-import CloseIcon from '@mui/icons-material/Close'
 import ImageCropDialog from './imageCropDialog'
-import useFirestore from '../../firebase/useFirestore'
 import ImagesList from './imageList'
-import { Box } from '@mui/material'
-import { green } from '@mui/material/colors'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
+import { ExpandMore } from '@mui/icons-material'
+import { request } from '../../helpers/utils'
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-        padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-        padding: theme.spacing(1),
-    },
-}))
-
-const BootstrapDialogTitle = (props) => {
-    const { children, onClose, ...other } = props
-
-    return (
-        <DialogTitle sx={ { m: 0, p: 2 } } { ...other }>
-            { children }
-            { onClose ? (
-                <IconButton
-                    aria-label="close"
-                    onClick={ onClose }
-                    sx={ {
-                        position: 'absolute',
-                        right: 0,
-                        top: 0,
-                        width: "100%",
-                        height: "100%",
-                        color: (theme) => theme.palette.grey[200],
-                    } }
-                >
-                    <CloseIcon />
-                </IconButton>
-            ) : null }
-        </DialogTitle>
-    )
-}
-
-BootstrapDialogTitle.propTypes = {
-    children: PropTypes.node,
-    onClose: PropTypes.func.isRequired,
-}
-
-const CropperDialog = ({ remoteData}) => {
-    //const { documents } = useFirestore('gallery')
+const CropperDialog = () => {
     const [open, setOpen] = useState(false)
+    const [expanded, setExpanded] = useState(false)
     const [selected, setSelected] = useState(null)
-    const [images, setImages] = useState(remoteData)
+    const [name, setName] = useState()
+    const [remoteData, setRemoteData] = useState()
+    const [aspect, setAspect] = useState(1)
+    const [path, setPath] = useState(null)
+
+    useEffect(() => {
+        console.log("NEW-ASPECT: ", aspect)
+        fetchData()
+    }, [])
+
+    const fetchData = async () => {
+        const resp = await request('/content')
+        setRemoteData(resp?.data)
+        //console.log("REMOTE-DATA: ", resp)
+    }
 
     const onCancel = () => {
         setSelected(null)
     }
 
     const setCroppedImageFor = (id, crop, zoom, aspect, croppedImageUrl) => {
+        const images = remoteData[name].images
         const newImageList = [...images]
-        const imageIndex = images.findIndex((x) => x.id === id)
+        const imageIndex = images.findIndex((img) => img.id === id)
         const image = images[imageIndex]
+
         const newImage = { ...image, croppedImageUrl, crop, zoom, aspect }
-        console.log("NEW-IMAGE: ", newImage)
         newImageList[imageIndex] = newImage
 
-        setImages(newImageList)
+        let newData = remoteData[name]
+        newData = { ...newData, images: images }
+        //console.log("NEW-DATA: ", newData)
         setSelected(null)
     }
 
@@ -80,22 +53,51 @@ const CropperDialog = ({ remoteData}) => {
         setCroppedImageFor(id)
     }
 
-    const handleClickOpen = (data) => {
+    const handleClickOpen = (data, name) => {
+        setPath(data?.path)
+        console.log("DATA: ", data)
         setSelected(data)
+        setName(name)
         setOpen(true)
     }
     const handleClose = () => {
+        setCroppedImageFor(selected.id)
         setOpen(false)
     }
 
-    //console.log(images)
+    const handleChange = (id) => (event, isExpanded) => {
+        setExpanded(isExpanded ? id : null)
+    }
+
+    const setAspectRatio = (newAspect) => {
+        setAspect(newAspect)
+    }
 
     return (
         <div>
-            <ImagesList
-                images={ images }
-                onOpen={ handleClickOpen }
-            />
+            {
+                remoteData && Object.values(remoteData).map((data, index) => (
+                    <Accordion
+                        key={ index }
+                        expanded={ expanded === data?._id }
+                        onChange={ handleChange(data?._id) }>
+                        <AccordionSummary
+                            expandIcon={ <ExpandMore /> }
+                            aria-controls="panel4bh-content"
+                            id="panel4bh-header">
+
+                            <Typography sx={ { width: '33%', flexShrink: 0 } }>{ data.route }</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <ImagesList
+                                images={ data.images }
+                                name={ data.name }
+                                onOpen={ handleClickOpen }
+                            />
+                        </AccordionDetails>
+                    </Accordion>
+                ))
+            }
             <Dialog
                 fullWidth={ true }
                 maxWidth={ "lg" }
@@ -104,7 +106,7 @@ const CropperDialog = ({ remoteData}) => {
                 aria-labelledby="responsive-dialog-title"
 
             >
-                <DialogTitle>Optional sizes</DialogTitle>
+                <DialogTitle>Image Edit</DialogTitle>
                 <DialogContent>
                     <Box
                         noValidate
@@ -117,11 +119,10 @@ const CropperDialog = ({ remoteData}) => {
                         } }
                     >
                         { selected ? (<ImageCropDialog
-                            id={ selected.uid }
-                            imageUrl={ selected.imageURL }
-                            cropInit={ selected.crop }
-                            zoomInit={ selected.zoom }
-                            aspectInit={ selected.aspect }
+                            id={ selected.id }
+                            imageUrl={ selected.path }
+                            aspectInit={ aspect }
+                            onAspect={ setAspectRatio }
                             onCancel={ onCancel }
                             setCroppedImageFor={ setCroppedImageFor }
                             resetImage={ resetImage }
@@ -133,7 +134,7 @@ const CropperDialog = ({ remoteData}) => {
                     <Button onClick={ handleClose }>Close</Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </div >
     )
 }
 

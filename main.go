@@ -47,6 +47,7 @@ func main() {
 
 	api.HandleFunc("/content", create).Methods("POST")
 	api.HandleFunc("/content", getAll).Methods("GET")
+	api.HandleFunc("/upload", uploadHandler).Methods("POST")
 
 	// Serve static files
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./build/static/"))))

@@ -7,8 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-
-	"github.com/gorilla/mux"
+	"time"
 )
 
 // spaHandler implements the http.Handler interface, so we can use it
@@ -22,9 +21,8 @@ type spaHandler struct {
 
 var resp Response
 var data Data
-const MAX_UPLOAD_SIZE = 1024 * 1024 // 1MB
 
-func init(){
+func init() {
 	data = make(map[string]Content)
 }
 
@@ -34,10 +32,11 @@ func getAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println(r.RequestURI)
+
 	resp = Response{Success: true, Data: data}
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(data); err != nil {
+	if err := json.NewEncoder(w).Encode(resp); err != nil {
 		panic(err)
 	}
 }
@@ -55,74 +54,92 @@ func create(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	data[c.Route] = c
+	data[c.Name] = c
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	resp = Response{Success: true, Data: data}
 	json.NewEncoder(w).Encode(resp)
 }
 
-// This function returns the filename(to save in database) of the saved file
-// or an error if it occurs
-func handleUpload(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-
+func uploadHandler(w http.ResponseWriter, r *http.Request) {
+	//r.Header.Add("Content-Type", w.FormDataContentType())
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	if r.Method != "POST" {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	// MultipartReader parses a request body as multipart/form-data with a MAX_UPLOAD_SIZE
-	//r.Body = http.MaxBytesReader(w, r.Body, MAX_UPLOAD_SIZE)
-	mr, err := r.MultipartReader()
-	if err != nil {
-		http.Error(w, "The uploaded file is too big. Please choose an file that's less than 1MB in size", http.StatusBadRequest)
+	// 32 MB is the default used by FormFile
+	if err := r.ParseMultipartForm(32 << 20); err != nil {
+		fmt.Println(err.Error())
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	// This is path which we want to store the file with file permision 0666 or 0755 or 0644
-	dst, err := os.OpenFile("./web/public/"+params["fileName"], os.O_WRONLY|os.O_CREATE, 0644)
-	if err != nil {
-		return
-	}
+	// get a reference to the fileHeaders
+	files := r.MultipartForm.File["file"]
 
-	defer dst.Close()
-
-	length := r.ContentLength
-	for {
-
-		part, err := mr.NextPart()
-		if err == io.EOF {
-			fmt.Printf("\nDone!")
-			break
+	for _, fileHeader := range files {
+		if fileHeader.Size > MAX_UPLOAD_SIZE {
+			http.Error(w, fmt.Sprintf("The uploaded image is too big: %s. Please use an image less than 1MB in size", fileHeader.Filename), http.StatusBadRequest)
+			return
 		}
 
-		var read int64
-		var progress float32
+		file, err := fileHeader.Open()
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 
-		for {
-			buffer := make([]byte, 100000)
+		defer file.Close()
 
-			cBytes, err := part.Read(buffer)
-			if err == io.EOF {
-				fmt.Printf("\nLast buffer read!")
-				break
-			}
+		buff := make([]byte, 512)
+		_, err = file.Read(buff)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 
-			read = read + int64(cBytes)
-			progress = float32(read) / float32(length) * 100
-			fmt.Printf("progress: %v \n", progress)
-			dst.Write(buffer[0:cBytes])
+		filetype := http.DetectContentType(buff)
+		if filetype != "image/jpeg" && filetype != "image/png" {
+			http.Error(w, "The provided file format is not allowed. Please upload a JPEG or PNG image", http.StatusBadRequest)
+			return
+		}
+
+		_, err = file.Seek(0, io.SeekStart)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		err = os.MkdirAll("./uploads", os.ModePerm)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		f, err := os.Create(fmt.Sprintf("./uploads/%d%s", time.Now().UnixNano(), filepath.Ext(fileHeader.Filename)))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+
+		defer f.Close()
+
+		pr := &Progress{
+			TotalSize: fileHeader.Size,
+		}
+
+		_, err = io.Copy(f, io.TeeReader(file, pr))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
 		}
 	}
 
 	fmt.Fprintf(w, "Upload successful")
 }
 
-// ServeHTTP inspects the URL path to locate a file within the static dir
-// on the SPA handler. If a file is found, it will be served. If not, the
-// file located at the index path on the SPA handler will be served. This
-// is suitable behavior for serving an SPA (single page application).
 func (h spaHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// get the absolute path to prevent directory traversal

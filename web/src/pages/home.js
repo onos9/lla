@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
-import { Footer, Header, Slider, UserHeader } from "../components/site"
-import { getLocalSitedata, request } from '../helpers/utils'
+import { Slider, UserHeader } from "../components/site"
 
 const Home = ({ post }) => {
 

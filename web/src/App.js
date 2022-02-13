@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
+import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Footer, Header } from "./components/site"
 import './App.css'
 
@@ -20,13 +20,10 @@ import {
 import { getLocalSitedata, request } from './helpers/utils'
 
 function App() {
-  //const [remoteData, setRemoteData] = useState(null)
 
   const handlePost = async (ref) => {
     const data = getLocalSitedata(ref)
-    let resp = await request('GET')
-    if (!resp?.success) resp = await request('POST', data)
-    //setRemoteData(resp)
+    const resp = await request('/content', 'POST', { body: data })
     console.log('RESPONSE: ', resp)
   }
 
