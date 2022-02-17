@@ -41,10 +41,11 @@ const Footer = () =>{
 										<li><Link to={"/about-1"}>About </Link></li>
 										<li><Link to={"/faqs"}>Faq</Link></li>
 										<li><Link to={"/event"}>Event</Link></li>
-										<li><Link to={"/blog-details"}>Blog</Link></li>
+										<li><Link to={ "/blog-details" }>Blog</Link></li>
 										<li><Link to={"/gallery"}>Gallery</Link></li>
 										<li><Link to={"/classes"}>Classes</Link></li>
-										<li><Link to={"/contect-us"}>Contact</Link></li>
+										<li><Link to={ "/contect-us" }>Contact</Link></li>
+										<li><Link to={ "/coming-soon" }>Comign Soon</Link></li>
 									</ul>
 								</div>
 							</div>

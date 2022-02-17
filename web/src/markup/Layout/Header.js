@@ -37,13 +37,13 @@ class Header extends Component{
 							<div className="row d-flex justify-content-between">
 								<div className="dlab-topbar-left">
 									<ul>
-										<li><i className="fa fa-phone m-r5"></i> 001 1234 6789</li>
-										<li><i className="fa fa-map-marker m-r5"></i> 6701 Democracy Blvd, Suite 300, USA</li>
+										<li><i className="fa fa-phone m-r5"></i>+234 809 604 1650</li>
+										<li><i className="fa fa-map-marker m-r5"></i> No. 20 Genabe Zone, Welfare Quarters, Makurdi, Nigeria</li>
 									</ul>
 								</div>
 								<div className="dlab-topbar-right">
 									<ul>
-										<li><i className="fa fa-clock-o m-r5"></i> Opening Time : 9:30am-5:30pm</li>
+										<li><i className="fa fa-clock-o m-r5"></i> Opening Time : 7:00am-3:00pm</li>
 									</ul>
 								</div>
 							</div>
@@ -55,7 +55,7 @@ class Header extends Component{
 							<div className="container clearfix">
 								{/*  website logo */} 
 								<div className="logo-header mostion">
-									<Link to={"./"} className="dez-page"><img src={logo} alt="" /></Link>
+									<Link to={"./"} className="dez-page"><img src='' alt="Lighthouse Leading Academy" /></Link>
 								</div>
 								{/* nav toggle button */}
 								<button className="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,31 +69,31 @@ class Header extends Component{
 										<Link to={"./"} className="dez-page"><img src={logo} alt="" /></Link>
 									</div>
 									<ul className="nav navbar-nav">	
-										<li className="active"><Link to={'#'}>Home <i className="fa fa-chevron-down"></i></Link>
-											<ul className="sub-menu">
+										<li className="active"><Link to={'./'}>Home </Link>
+											{/* <ul className="sub-menu">
 												<li><Link to={"./"}>Home 1</Link></li>
 												<li><Link to={"/index-2"}>Home 2</Link></li>
-											</ul>	
+											</ul>	 */}
 										</li>
-										<li><Link to={'#'}>About <i className="fa fa-chevron-down"></i></Link>
-											<ul className="sub-menu">
+										<li><Link to={'/about-1'}>About </Link>
+											{/* <ul className="sub-menu">
 												<li><Link to={"/about-1"}>About Us 1</Link></li>
 												<li><Link to={"/about-2"}>About Us 2</Link></li>
-											</ul>
+											</ul> */}
 										</li>
-										<li><Link to={'#'}>Classes <i className="fa fa-chevron-down"></i></Link>
-											<ul className="sub-menu">
+										<li><Link to={'/classes'}>Classes </Link>
+											{/* <ul className="sub-menu">
 												<li><Link to={"/classes"}>Classes</Link></li>
 												<li><Link to={"/classes-details"}>Classes Details</Link></li>
-											</ul>
+											</ul> */}
 										</li>
-										<li><Link to={'#'}>Teachers <i className="fa fa-chevron-down"></i></Link>
-											<ul className="sub-menu">
+										<li><Link to={'/teachers'}>Teachers</Link>
+											{/* <ul className="sub-menu">
 												<li><Link to={"/teachers"}>Teachers</Link></li>
 												<li><Link to={"/teachers-details"}>Teachers Details</Link></li>
-											</ul>
+											</ul> */}
 										</li>
-										<li><Link to={'#'}>Pages <i className="fa fa-chevron-down"></i></Link>
+										{/* <li><Link to={'#'}>Pages <i className="fa fa-chevron-down"></i></Link>
 											<ul className="sub-menu">
 												<li><Link to={"/coming-soon"}>Comign Soon</Link></li>
 												<li><Link to={"/faqs"}>Faqs</Link></li>
@@ -101,20 +101,20 @@ class Header extends Component{
 												<li><Link to={"/event-details"}>Event Details</Link></li>
 												<li><Link to={"/error-404"}>Error 404</Link></li>
 											</ul>
-										</li>
-										<li><Link to={'#'}>Blog <i className="fa fa-chevron-down"></i></Link>
-											<ul className="sub-menu">
+										</li> */}
+										<li><Link to={'/blog-standard'}>Blog </Link>
+											{/* <ul className="sub-menu">
 												<li><Link to={"/blog-standard"}>Standard</Link></li>
 												<li><Link to={"/blog-classic-grid"}>Classic</Link></li>
 												<li><Link to={"/blog-details"}>Blog Details</Link></li>
-											</ul>
+											</ul> */}
 										</li>
-										<li><Link to={'#'}>Our Gallery <i className="fa fa-chevron-down"></i></Link>
-											<ul className="sub-menu">
+										<li><Link to={'/gallery-masonary'}>Our Gallery </Link>
+											{/* <ul className="sub-menu">
 												<li><Link to={"/gallery"}>Gallery Grid</Link></li>
 												<li><Link to={"/gallery-masonary"}>Gallery Masonary</Link></li>
 												<li><Link to={"/gallery-filter"}>Gallery Tiles Filter</Link></li>
-											</ul>
+											</ul> */}
 										</li>
 										<li><Link to={"/contact-us"}>Contact Us</Link></li>
 									</ul>		

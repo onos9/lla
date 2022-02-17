@@ -74,7 +74,7 @@ function BackgroundBlog2(){
 					<div className="col-lg-12 col-md-12 col-sm-12 col-12  about-text"  style={{visibility: "visible", animationDuration: "2s", animationDelay: "0.2s", animationName: "fadeIn"}}>
 						<div className="section-head text-center">
 							<h4 className="text-white">Join Our New Session</h4>
-							<h2>Call To Enrol Your Child <br/><span className="text-yellow">222 4444 000</span></h2>
+							<h2>Call To Enrol Your Child <br/><span className="text-yellow">+234 809 604 1650</span></h2>
 							<Link to={"./contect-us"} className="btn btn-md radius-xl">Read More</Link>
 						</div>
 					</div>
@@ -97,7 +97,7 @@ class AboutUs1 extends Component{
 			<Fragment>
 				<Header />	
 				 <div className="page-content">
-					<PageTitle  motherMenu="About Us 1"  activeMenu="About Us 1" />
+					<PageTitle  motherMenu="About Us"  activeMenu="About Us" />
 					<div className="content-block">
 						<div className="section-full bg-white content-inner-2 about-area" style={{backgroundImage:"url("+ bnr1 +")", backgroundSize:"contain", backgroundRepeat: "no-repeat",backgroundPosition: "center"}}>
 							<div className="container">
