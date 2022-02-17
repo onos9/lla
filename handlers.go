@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"time"
 )
 
 // spaHandler implements the http.Handler interface, so we can use it
@@ -62,7 +61,6 @@ func create(w http.ResponseWriter, r *http.Request) {
 }
 
 func uploadHandler(w http.ResponseWriter, r *http.Request) {
-	//r.Header.Add("Content-Type", w.FormDataContentType())
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	if r.Method != "POST" {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -71,7 +69,6 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 
 	// 32 MB is the default used by FormFile
 	if err := r.ParseMultipartForm(32 << 20); err != nil {
-		fmt.Println(err.Error())
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -105,20 +102,21 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "The provided file format is not allowed. Please upload a JPEG or PNG image", http.StatusBadRequest)
 			return
 		}
-
+		
 		_, err = file.Seek(0, io.SeekStart)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-
+		
 		err = os.MkdirAll("./uploads", os.ModePerm)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		f, err := os.Create(fmt.Sprintf("./uploads/%d%s", time.Now().UnixNano(), filepath.Ext(fileHeader.Filename)))
+		path := r.FormValue("path")
+		f, err := os.Create(fmt.Sprintf("./web/public/%s", path))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
